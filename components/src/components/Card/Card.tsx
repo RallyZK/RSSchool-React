@@ -10,9 +10,17 @@ class Card extends Component<Props> {
   render() {
     return (
       <div className='card'>
-        <div className='card-img'></div>
+        <img className='card-img' src={this.props.card.picUrl} alt={this.props.card.title}></img>
         <div className='card-content'>
-          <h3>{this.props.card.title}</h3>
+          <h4>{this.props.card.title}</h4>
+          <p className='card-location'>{this.props.card.location}</p>
+          <p className='card-price'>{this.props.card.price} AED</p>
+          <div className='card-desc'>
+            <p>{this.props.card.square} SqFt</p>
+            <p>{this.props.card.bedroomsCount} Beds</p>
+            <p>{this.props.card.bathroomsCount} Baths</p>
+          </div>
+          <button className='card-button'>Details</button>
         </div>
       </div>
     );

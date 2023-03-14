@@ -79,13 +79,6 @@ a:visited {
   right: 0px;
 }
 
-.cards-wrapper {
-  display: flex;
-  border: 1px white solid;
-  width: 100%;
-  min-height: 150px;
-}
-
 .active {
   background-color: #b41414;
   color: #b41414;

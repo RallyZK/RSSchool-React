@@ -39,7 +39,7 @@ export const catalog: IHouse[] = [
   },
   {
     id: 4,
-    title: 'Mirador 6BR ready to move|Large plot private pool',
+    title: 'Mirador 6BR ready to move | Large plot private pool',
     price: 7200000,
     location: 'Mirador 1, Mirador',
     bedroomsCount: 6,
@@ -47,11 +47,11 @@ export const catalog: IHouse[] = [
     square: 5.172,
     url: 'https://dubai.dubizzle.com/property-for-sale/residential/villahouse/2023/3/7/mirador-6br-ready-to-movelarge-plot-privat-2-133/?tracking_info=%7B%22userPath%22%3A%22LPV_Pos_NR_18%22%7D&funnel_subsection=LPV_Pos_NR_18&page=1',
     picUrl:
-      'https://dbz-images.dubizzle.com/images/2023/03/07/c8b53faa-262d-4861-ad4e-47fc0a159a02/76e32beff31146ec99153081fd922c55-.jpg?impolicy=legacy&imwidth=800',
+      'https://dbz-images.dubizzle.com/images/2023/03/07/b8acd0c8-2d11-40e6-b930-12152b12e991/42f4f735ac794aef935841fcca421d8a-.jpg?impolicy=legacy&imwidth=800',
   },
   {
     id: 5,
-    title: 'Exclusive Immaculate 4 BR Type B1| Alvorada',
+    title: 'Exclusive Immaculate 4 BR Type B1 | Alvorada',
     price: 6400000,
     location: 'Alvorada 2, Alvorada',
     bedroomsCount: 4,
@@ -63,7 +63,7 @@ export const catalog: IHouse[] = [
   },
   {
     id: 6,
-    title: 'Vacant | 3 bedroom| Type B |Close to Pool and Park',
+    title: 'Vacant | 3 bedroom| Type B | Close to Pool and Park',
     price: 3450000,
     location: 'Palmera 3, Palmera',
     bedroomsCount: 3,
@@ -87,7 +87,7 @@ export const catalog: IHouse[] = [
   },
   {
     id: 8,
-    title: 'VACANT|Single Row|Upgraded|Large Plot|Great Deal',
+    title: 'VACANT | Single Row | Upgraded | Large Plot | Great Deal',
     price: 5550000,
     location: 'Saheel 1, Saheel',
     bedroomsCount: 3,
@@ -145,16 +145,16 @@ export const catalog: IHouse[] = [
     picUrl:
       'https://dbz-images.dubizzle.com/images/2023/02/28/29ebdb8d-eb66-4252-8a1d-e08ddddb230e/45c70676af0f4a0db646b3ea671850d7-.jpg?impolicy=legacy&imwidth=800',
   },
-  {
-    id: 13,
-    title: 'Vacant | Brand New | Luxurious Custom Villa',
-    price: 33000000,
-    location: 'Parkway Vistas, Dubai Hills Estate',
-    bedroomsCount: 6,
-    bathroomsCount: 6,
-    square: 11453,
-    url: 'https://dubai.dubizzle.com/property-for-sale/residential/villahouse/2023/3/3/vacant-brand-new-luxurious-custom-villa-2-784/?tracking_info=%7B%22userPath%22%3A%22LPV_Pos_NR_16%22%7D&funnel_subsection=LPV_Pos_NR_16&page=2',
-    picUrl:
-      'https://dbz-images.dubizzle.com/images/2023/03/03/fd68b7a7-71d4-4fae-ac46-027d38e35d94/53387700609e4f6eb6449e90d1af0a1a-.jpg?impolicy=legacy&imwidth=800',
-  },
+  // {
+  //   id: 13,
+  //   title: 'Vacant | Brand New | Luxurious Custom Villa',
+  //   price: 33000000,
+  //   location: 'Parkway Vistas, Dubai Hills Estate',
+  //   bedroomsCount: 6,
+  //   bathroomsCount: 6,
+  //   square: 11453,
+  //   url: 'https://dubai.dubizzle.com/property-for-sale/residential/villahouse/2023/3/3/vacant-brand-new-luxurious-custom-villa-2-784/?tracking_info=%7B%22userPath%22%3A%22LPV_Pos_NR_16%22%7D&funnel_subsection=LPV_Pos_NR_16&page=2',
+  //   picUrl:
+  //     'https://dbz-images.dubizzle.com/images/2023/03/03/fd68b7a7-71d4-4fae-ac46-027d38e35d94/53387700609e4f6eb6449e90d1af0a1a-.jpg?impolicy=legacy&imwidth=800',
+  // },
 ];

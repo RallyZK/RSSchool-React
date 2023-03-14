@@ -4,7 +4,6 @@ import Error404 from './pages/Error404';
 import HomePage from './pages/HomePage';
 import React, { Component } from 'react';
 import Layout from './components/Layout';
-import { catalog } from './utils/catalog';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -13,7 +12,7 @@ class App extends Component {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path='/' element={<HomePage catalog={catalog} />} />
+            <Route path='/' element={<HomePage />} />
             <Route path='/about' element={<AboutUs />} />
             <Route path='/*' element={<Error404 />} />
           </Routes>
