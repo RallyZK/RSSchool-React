@@ -1,1 +1,1 @@
-# RSSchool-React
+# RSSchool-React - repository for "React 2023 Q1" course tasks
