@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
+import './Layout.css';
 
 type Props = {
   children: React.ReactNode;
@@ -9,11 +10,9 @@ type Props = {
 class Layout extends Component<Props> {
   render() {
     return (
-      <div className='flex flex-col justify-between min-h-screen'>
+      <div className='layout'>
         <Header />
-        <main id='main' className='flex justify-center'>
-          {this.props.children}
-        </main>
+        <main id='main'>{this.props.children}</main>
         <Footer />
       </div>
     );

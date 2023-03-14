@@ -3,21 +3,17 @@ import React, { Component } from 'react';
 class Footer extends Component {
   render() {
     return (
-      <div className='flex py-1 px-5 justify-center w-full bg-green-900'>
-        <nav className='w-full'>
-          <ul className='w-full flex justify-between '>
+      <div className='footer'>
+        <nav className='footer-ul'>
+          <ul className='footer-ul'>
             <li>
-              <a href='#' className='transition ease-in duration-300 hover:text-white'>
+              <a href='https://github.com/RallyZK' rel='noreferrer' target='_blank' className='navlink'>
                 GitHub
               </a>
             </li>
+            <li className=''>2023</li>
             <li>
-              <a href='#' className='transition ease-in duration-300 hover:text-white'>
-                2023
-              </a>
-            </li>
-            <li>
-              <a href='#' className='transition ease-in duration-300 hover:text-white'>
+              <a href='https://rs.school/react/' rel='noreferrer' target='_blank' className='navlink'>
                 RS School
               </a>
             </li>

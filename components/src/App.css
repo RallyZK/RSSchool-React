@@ -1,44 +1,96 @@
-.active {
-  color: white;
+#root {
+  background: linear-gradient(45deg, #292929 25%, transparent 25%, transparent 75%, #292929 75%),
+    linear-gradient(45deg, #292929 25%, transparent 25%, transparent 75%, #292929 75%) 0.1875em 0.1875em,
+    radial-gradient(at 50% 0, #484847, #090909);
+  background-size: 0.375em 0.375em, 0.375em 0.375em, 100% 100%;
+  color: #ffffff;
 }
 
-
-
-/* .App {
-  text-align: center;
+h1 {
+  margin: 0px;
+  text-transform: uppercase;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header,
+.footer {
+  height: 50px;
+  padding: 10px 20px;
+  background-color: rgba(1, 1, 1, 0.5);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  justify-content: space-between;
+}
+.footer {
+  justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-ul,
+.footer-ul {
+  display: flex;
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+  gap: 20px;
+}
+
+.header-ul {
+  justify-content: center;
+}
+
+.footer-ul {
+  width: 100%;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:visited {
+  color: #ffffff;
+}
+
+.navlink {
+  padding: 2px 6px;
+  border-radius: 1px;
+  transition: all ease-in;
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+
+.page {
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  gap: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.page-title {
+  position: absolute;
+  top: -77px;
+  right: 0px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.cards-wrapper {
+  display: flex;
+  border: 1px white solid;
+  width: 100%;
+  min-height: 150px;
+}
+
+.active {
+  background-color: #b41414;
+  color: #b41414;
+}
+.navlink:hover {
+  color: #d68484;
+}
+

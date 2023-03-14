@@ -1,0 +1,16 @@
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto;
+  height: 100%;
+  text-align: center;
+}
+
+.error-page > h1 {
+  font-size: 70px;
+  margin: 0px;  
+  color: #b41414;
+  filter: drop-shadow(0 0 0.05rem rgb(253, 252, 252));
+}
