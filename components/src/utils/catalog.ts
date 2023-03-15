@@ -125,7 +125,7 @@ export const catalog: IHouse[] = [
     id: 11,
     title: 'Luxurious | Great Location | Park Backing',
     price: 9975000,
-    location: 'Green Community West, Green Community',
+    location: 'Green Community West',
     bedroomsCount: 5,
     bathroomsCount: 6,
     square: 9000,

@@ -20,7 +20,9 @@ class Card extends Component<Props> {
             <p>{this.props.card.bedroomsCount} Beds</p>
             <p>{this.props.card.bathroomsCount} Baths</p>
           </div>
-          <button className='card-button'>Details</button>
+          <a className='card-button' href={this.props.card.url} rel='noreferrer' target='_blank'>
+            Details
+          </a>
         </div>
       </div>
     );

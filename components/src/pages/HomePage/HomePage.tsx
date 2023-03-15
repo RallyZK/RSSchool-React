@@ -9,7 +9,6 @@ class HomePage extends Component {
   catalogForRender: IHouse[] | undefined = catalog;
 
   render() {
-    console.log(this.catalogForRender);
     return (
       <div className='page'>
         <h1>Home Page</h1>

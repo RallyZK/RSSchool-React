@@ -5,16 +5,32 @@
 
 .search-input {
   outline: none;
+  width: 280px;
+  border-radius: 5px;
+  height: 30px;
+  padding-left: 10px;
 }
 
 .search-button {
   border: none;
-  border-radius: 2px;
+  border-radius: 5px;
   cursor: pointer;
   transition: all ease-in;
   transition-duration: 200ms;
+  background-color: #080101;
+  color: #ffffff;
+  width: 100px;
+  height: 30px;
 }
 
 .search-button:hover {
   background-color: #d68484;
+}
+
+@media (max-width: 505px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+  
 }

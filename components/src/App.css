@@ -87,3 +87,12 @@ a:visited {
   color: #d68484;
 }
 
+@media (max-width: 505px) {
+
+  .page-title {
+    top: -70px;
+    font-size: 14px;
+  }
+}
+
+

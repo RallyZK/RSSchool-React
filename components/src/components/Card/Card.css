@@ -66,7 +66,12 @@
   font-size: 14px;
 }
 
+.card-desc > p {
+  margin: 0;
+}
+
 .card-button {
+  display: block;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -75,8 +80,23 @@
   background-color: #3f3f3f;
   width: 40%;
   height: 25px;
+  margin: 0 auto;
 }
 
 .card-button:hover {
   background-color: #d68484;
+}
+
+@media (max-width: 505px) {
+  .card {
+    height: calc(fit-content);
+  }
+
+  .card-img {
+    height: 45%;
+  }
+  
+  .card-content {
+    height: 55%;
+  }
 }
