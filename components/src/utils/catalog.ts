@@ -3,15 +3,15 @@ import { IHouse } from './types';
 export const catalog: IHouse[] = [
   {
     id: 1,
-    title: 'Unique Modern Layout with Lavish Space',
-    price: 19999000,
-    location: 'Pearl Jumeirah, Dubai',
-    bedroomsCount: 7,
-    bathroomsCount: 9,
-    square: 9.3334,
-    url: 'https://dubai.dubizzle.com/property-for-sale/residential/villahouse/2023/2/16/unique-modern-layout-with-lavish-space-2-902/?tracking_info=%7B%22userPath%22%3A%22LPV_Pos_NR_7%22%7D&funnel_subsection=LPV_Pos_NR_7&page=1',
+    title: 'Type H | Vacant | With Study | Near to Park',
+    price: 2400000,
+    location: 'Mira Oasis 2, Mira Oasis',
+    bedroomsCount: 3,
+    bathroomsCount: 4,
+    square: 3.046,
+    url: 'https://dubai.dubizzle.com/property-for-sale/residential/villahouse/2023/3/7/type-h-vacant-with-study-near-to-park-2-899/?tracking_info=%7B%22userPath%22%3A%22LPV_Pos_NR_1%22%7D&funnel_subsection=LPV_Pos_NR_1&page=1',
     picUrl:
-      'https://dbz-images.dubizzle.com/images/2023/02/16/2d02531f-26aa-4e0f-8955-517c3072af8e/e25fcbb65cd24922a5ec1399132a34a5-.jpg?impolicy=legacy&imwidth=800',
+      'https://dbz-images.dubizzle.com/images/2023/03/07/6f8bfc3a-3310-4b2d-941c-8db6fd70557a/2131d8c31baf415b8bfa35b5eac39527-.jpg?impolicy=legacy&imwidth=800',
   },
   {
     id: 2,
