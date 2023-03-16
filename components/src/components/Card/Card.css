@@ -92,7 +92,16 @@
 
 @media (max-width: 505px) {
   .card {
-    height: calc(fit-content);
+    width: 330px;
+    margin: 0 auto;
+  }
+
+  .card-content {
+    padding: 10px 10px 0px;
+  }
+
+  .card-content > h4 {
+    height: auto;
   }
 
   .card-img {
@@ -101,5 +110,11 @@
   
   .card-content {
     height: 55%;
+  }
+}
+
+@media (max-width: 370px) {
+  .card {
+    width: 290px;
   }
 }

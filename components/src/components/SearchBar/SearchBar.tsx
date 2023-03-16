@@ -32,9 +32,7 @@ class SearchBar extends Component {
           onChange={this.handleChange}
           placeholder='Enter something'
         ></input>
-        <button className='search-button' type='submit'>
-          Search
-        </button>
+        <button className='search-button' type='submit'></button>
       </form>
     );
   }
