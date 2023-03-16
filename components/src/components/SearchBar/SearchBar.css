@@ -24,7 +24,8 @@
 }
 
 .search-button:hover {
-  background-color: #d68484;
+  background-color: #38bdf8;
+  color: #000000;
 }
 
 @media (max-width: 505px) {
