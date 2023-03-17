@@ -5,6 +5,7 @@ class SearchBar extends Component {
   state = {
     searchPhrase: '',
   };
+  myRef = React.createRef<HTMLInputElement>();
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
@@ -20,13 +21,15 @@ class SearchBar extends Component {
 
   componentDidMount() {
     const searchPhraseFromLS = localStorage.getItem('searchPhraseToLS');
-    this.setState({ searchPhrase: searchPhraseFromLS });
+    this.setState({ searchPhrase: searchPhraseFromLS || '' });
   }
 
   render() {
+    console.log('this.state.searchPhrase:::', this.state.searchPhrase);
     return (
       <form className='search-bar' onSubmit={(event) => this.handleFormSubmit(event)}>
         <input
+          ref={this.myRef}
           className='search-input'
           value={this.state.searchPhrase}
           onChange={this.handleChange}

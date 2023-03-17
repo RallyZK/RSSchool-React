@@ -1,10 +1,10 @@
 import React from 'react';
-import Footer from './Footer';
+import Footer from '../components/Footer/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 describe('Footer test', () => {
-  it('Footer renders correctly', async () => {
+  test('Footer renders correctly', () => {
     render(
       <BrowserRouter>
         <Footer />
@@ -15,5 +15,7 @@ describe('Footer test', () => {
     expect(screen.getByText(/GitHub/i)).toBeInTheDocument();
     expect(screen.getByText(/2023/i)).toBeInTheDocument();
     expect(screen.getByText(/RS School/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /GitHub/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /RS School/i })).toBeInTheDocument();
   });
 });

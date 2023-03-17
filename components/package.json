@@ -26,8 +26,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "^5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5"
   },
   "resolutions": {
     "@types/react": "^18.0.28"
@@ -35,7 +34,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll=false ",
+    "debugTest": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx src"
   },
@@ -61,5 +61,11 @@
     "@babel/preset-typescript": "^7.21.0",
     "@testing-library/react": "^14.0.0",
     "eslint-plugin-prettier": "^4.2.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!**/node_modules/**"
+    ]
   }
 }

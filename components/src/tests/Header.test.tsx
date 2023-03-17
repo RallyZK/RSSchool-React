@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../components/Header/Header';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 describe('Header test', () => {
-  it('Header renders correctly', async () => {
+  test('Header renders correctly', () => {
     render(
       <BrowserRouter>
         <Header />
