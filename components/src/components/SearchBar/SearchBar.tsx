@@ -25,7 +25,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log('this.state.searchPhrase:::', this.state.searchPhrase);
     return (
       <form className='search-bar' onSubmit={(event) => this.handleFormSubmit(event)}>
         <input

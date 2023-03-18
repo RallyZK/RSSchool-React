@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
-
-  testmethod() {
-    console.log('gybuhnmikjmokk')
-  }
-
   render() {
     return (
       <header className='header'>
