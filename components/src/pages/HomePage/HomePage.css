@@ -9,7 +9,6 @@ h1 {
   text-align: center;
 }
 
-
 @media (max-width: 1000px) {
   .cards-wrapper {
     grid-template-columns: repeat(3, 1fr);

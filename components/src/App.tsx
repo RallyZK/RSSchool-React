@@ -1,4 +1,5 @@
 import './App.css';
+import Forms from './pages/Forms';
 import AboutUs from './pages/AboutUs';
 import Error404 from './pages/Error404';
 import HomePage from './pages/HomePage';
@@ -14,6 +15,7 @@ class App extends Component {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/about' element={<AboutUs />} />
+            <Route path='/forms' element={<Forms />} />
             <Route path='/*' element={<Error404 />} />
           </Routes>
         </Layout>

@@ -14,5 +14,6 @@ describe('Header test', () => {
     screen.debug();
     expect(screen.getByText(/home page/i)).toBeInTheDocument();
     expect(screen.getByText(/about us/i)).toBeInTheDocument();
+    expect(screen.getByText(/forms/i)).toBeInTheDocument();
   });
 });
