@@ -1,0 +1,102 @@
+#root {
+  background-color: #bae6fd;
+	background-image: 
+		linear-gradient(transparent 0px, transparent 49px, rgba(255,255,255, 0.2) 50px, transparent 51px, transparent 99px, rgba(255,255,255, 0.2) 100px), 
+		linear-gradient(120deg, transparent 0, transparent 48px, rgba(255,255,255, 0.2) 49px, transparent 50px, transparent 98px, rgba(255,255,255, 0.2) 99px, transparent 100px), 
+		linear-gradient(60deg, transparent 0, transparent 48px, rgba(255,255,255, 0.2) 49px, transparent 50px, transparent 98px, rgba(255,255,255, 0.2) 99px, transparent 100px), 
+		linear-gradient(90deg, #f0fdfa, #bae6fd);
+	background-size: 100px 100px, 115px 100px, 115px 100px, auto;
+}
+
+h1 {
+  margin: 0px;
+  text-transform: uppercase;
+}
+
+.header,
+.footer {
+  height: 50px;
+  padding: 10px 20px;
+  background-color: #bae6fd;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.header {
+  justify-content: space-between;
+  border-bottom: 1px #ffffff solid;
+}
+.footer {
+  justify-content: center;
+  border-top: 1px #ffffff solid;
+}
+
+.header-ul,
+.footer-ul {
+  display: flex;
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+  gap: 20px;
+}
+
+.header-ul {
+  justify-content: center;
+}
+
+.footer-ul {
+  width: 100%;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:visited {
+  color: #000000;
+}
+
+.navlink {
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: all ease-in;
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.page-title {
+  position: absolute;
+  top: -77px;
+  right: 0px;
+}
+
+.active {
+  background-color: #ffffff;
+}
+.navlink:hover {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+@media (max-width: 505px) {
+
+  .page-title {
+    top: -70px;
+    font-size: 14px;
+  }
+}
+
+
