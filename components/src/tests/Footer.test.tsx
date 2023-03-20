@@ -10,8 +10,6 @@ describe('Footer test', () => {
         <Footer />
       </BrowserRouter>,
     );
-    // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
     expect(screen.getByText(/GitHub/i)).toBeInTheDocument();
     expect(screen.getByText(/2023/i)).toBeInTheDocument();
     expect(screen.getByText(/RS School/i)).toBeInTheDocument();

@@ -5,8 +5,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 describe('SearchBar test', () => {
   test('SearchBar renders and works correctly', () => {
     render(<SearchBar />);
-    // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
     const inputElement = screen.getByRole<HTMLInputElement>('textbox');
     const buttonElement = screen.getByRole<HTMLButtonElement>('button');
 
