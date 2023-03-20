@@ -32,8 +32,8 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
     this.setState({ searchPhrase: searchPhraseFromLS || '' });
   }
 
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchPhrase: event.target.value });
+  handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    await this.setState({ searchPhrase: event.target.value });
     this.saveToLS();
   };
 
