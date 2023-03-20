@@ -13,18 +13,14 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
   constructor(props: SearchBarProps) {
     super(props);
     this.state = {
-      searchPhrase: '',
+      searchPhrase: localStorage.getItem('searchPhraseToLS') || '',
     };
   }
 
   myRef = React.createRef<HTMLInputElement>();
 
-  saveToLS = () => {
+  componentWillUnmount() {
     localStorage.setItem('searchPhraseToLS', this.state.searchPhrase);
-  };
-
-  componentWilldMount() {
-    this.saveToLS();
   }
 
   componentDidMount() {
@@ -32,14 +28,12 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
     this.setState({ searchPhrase: searchPhraseFromLS || '' });
   }
 
-  handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    await this.setState({ searchPhrase: event.target.value });
-    this.saveToLS();
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ searchPhrase: event.target.value });
   };
 
   handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.saveToLS();
   };
 
   render() {
