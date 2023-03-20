@@ -5,19 +5,12 @@ type SearchBarState = {
   searchPhrase: string;
 };
 
-type SearchBarProps = {
-  smth?: string;
-};
+type SearchBarProps = Record<string, never>;
 
 class SearchBar extends Component<SearchBarProps, SearchBarState> {
-  constructor(props: SearchBarProps) {
-    super(props);
-    this.state = {
-      searchPhrase: localStorage.getItem('searchPhraseToLS') || '',
-    };
-  }
-
-  myRef = React.createRef<HTMLInputElement>();
+  state = {
+    searchPhrase: localStorage.getItem('searchPhraseToLS') || '',
+  };
 
   componentWillUnmount() {
     localStorage.setItem('searchPhraseToLS', this.state.searchPhrase);
@@ -40,7 +33,6 @@ class SearchBar extends Component<SearchBarProps, SearchBarState> {
     return (
       <form className='search-bar' onSubmit={(event) => this.handleFormSubmit(event)}>
         <input
-          ref={this.myRef}
           type='text'
           placeholder='Enter something'
           className='search-input'
