@@ -5,8 +5,6 @@ import { render, screen } from '@testing-library/react';
 describe('Error404 test', () => {
   test('Error404 renders correctly', () => {
     render(<Error404 />);
-    // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
     expect(screen.getByText(/ERROR 404/i)).toBeInTheDocument();
     expect(screen.getByText(/The page you are looking for can`t be found/i)).toBeInTheDocument();
   });

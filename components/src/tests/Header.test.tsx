@@ -10,8 +10,6 @@ describe('Header test', () => {
         <Header />
       </BrowserRouter>,
     );
-    // eslint-disable-next-line testing-library/no-debugging-utils
-    screen.debug();
     expect(screen.getByText(/home page/i)).toBeInTheDocument();
     expect(screen.getByText(/about us/i)).toBeInTheDocument();
     expect(screen.getByText(/forms/i)).toBeInTheDocument();
