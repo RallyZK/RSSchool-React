@@ -13,15 +13,18 @@ class FormCard extends Component<Props> {
         <img className='form-card-img' src={this.props.card.file} alt={this.props.card.name}></img>
         <div className='form-card-content'>
           <h4>{this.props.card.name}</h4>
-          <p className='form-card-desc'>Visit date: {new Date(this.props.card.date).toISOString().slice(0, 10)}</p>
-          <p className='form-card-desc'>Purpose of the visit: {this.props.card.purpose}</p>
           <p className='form-card-desc'>
-            Type of realEstate:{' '}
-            {this.props.card.realEstate.map((el) => {
-              return el.checked ? <span key={el.name}>el.name</span> : '';
-            })}
+            <span className='span'>Visit date:</span> {this.props.card.date}
           </p>
-          <p className='form-card-desc'>Transfer is needed: {this.props.card.transfer}</p>
+          <p className='form-card-desc'>
+            <span className='span'>Purpose of the visit:</span> {this.props.card.purpose}
+          </p>
+          <p className='form-card-desc'>
+            <span className='span'>Transfer is needed:</span> {this.props.card.transfer}
+          </p>
+          <p className='form-card-desc'>
+            <span className='span'>Interested in:</span> {this.props.card.realEstate.join(', ')}{' '}
+          </p>
         </div>
       </div>
     );

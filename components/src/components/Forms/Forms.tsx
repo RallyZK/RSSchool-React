@@ -1,18 +1,20 @@
 import './Forms.css';
 import React, { Component } from 'react';
-import { allFormCards, emptyState } from '../../utils/types';
+import { emptyState, IFormCard } from '../../utils/types';
+import CardInForms from '../CardInForms';
 
 class Forms extends Component {
   state = emptyState;
+  cards = [];
 
   formRef = React.createRef<HTMLFormElement>();
   nameRef = React.createRef<HTMLInputElement>();
   dateRef = React.createRef<HTMLInputElement>();
   purposeRef = React.createRef<HTMLSelectElement>();
-  optionRef = React.createRef<HTMLOptionElement>();
-  typeRef = React.createRef<HTMLInputElement>();
-  chexboxRef = React.createRef<HTMLInputElement>();
-  transferRef = React.createRef<HTMLInputElement>();
+  chexboxRefVilla = React.createRef<HTMLInputElement>();
+  chexboxRefApartment = React.createRef<HTMLInputElement>();
+  transferRefyes = React.createRef<HTMLInputElement>();
+  transferRefno = React.createRef<HTMLInputElement>();
   fileRef = React.createRef<HTMLInputElement>();
 
   checkName = (): void => {
@@ -32,47 +34,27 @@ class Forms extends Component {
     }
   };
 
-  // onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const box = this.typeRef.current;
-  //   let selectedArrBox = this.state.checkboxes;
-  //   console.log('checkboxes::::::', this.typeRef.current);
-  //   selectedArrBox = this.state.checkboxes.map((el: ICheckBox) => {
-  //     if (box && el.name === box.name) {
-  //       el.checked = !el.checked;
-  //     }
-  //     return el;
-  //   });
-
-  //   this.setState({ checkboxes: selectedArrBox });
-  // };
-
   checkCheckboxes = (): void => {
     let checkedCount = 0;
-    this.state.checkboxes.forEach((box) => {
-      checkedCount = box.checked ? checkedCount + 1 : checkedCount + 0;
-    });
+    if (this.chexboxRefVilla.current) {
+      checkedCount = this.chexboxRefVilla.current.checked ? checkedCount + 1 : checkedCount + 0;
+    }
+    if (this.chexboxRefApartment.current) {
+      checkedCount = this.chexboxRefApartment.current.checked ? checkedCount + 1 : checkedCount + 0;
+    }
     const err = checkedCount === 0 ? 'Select something' : '';
     this.setState({ checkboxError: err });
   };
 
   handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('state:::', this.state);
     this.checkName();
     this.checkSelect();
     this.checkCheckboxes();
     if (!this.state.nameError && !this.state.selectError && !this.state.checkboxError) {
-      // allFormCards.push({
-      //   name: this.nameRef.current.value,
-      //   date: this.dateRef.current.value,
-      //   purpose: this.purposeRef.current.value,
-      //   realEstate: this.typeRef.current.value,
-      //   transfer: this.transferRef.current.value,
-      //   file: this.fileRef.current.value,
-      // });
-      console.log('all inputs checked!!!');
-      console.log('allFormCards:::', allFormCards);
-      // this.clearForm();
+      this.createCardInfo();
+      console.log('state:::', this.state);
+      this.clearForm();
     }
   };
 
@@ -80,81 +62,119 @@ class Forms extends Component {
     this.formRef.current && this.formRef.current.reset();
   };
 
+  createCardInfo = () => {
+    const card: IFormCard = {
+      name: '',
+      date: '',
+      purpose: '',
+      realEstate: [],
+      transfer: '',
+      file: '',
+    };
+    if (this.nameRef && this.nameRef.current) card.name = this.nameRef.current.value;
+    if (this.dateRef && this.dateRef.current) card.date = this.dateRef.current.value;
+    if (this.purposeRef && this.purposeRef.current) card.purpose = this.purposeRef.current.value;
+    if (
+      this.chexboxRefVilla &&
+      this.chexboxRefVilla.current?.checked &&
+      this.chexboxRefVilla.current?.name &&
+      card.realEstate
+    )
+      card.realEstate.push(this.chexboxRefVilla.current?.name);
+    if (
+      this.chexboxRefApartment &&
+      this.chexboxRefApartment.current?.checked &&
+      this.chexboxRefApartment.current?.name &&
+      card.realEstate
+    )
+      card.realEstate.push(this.chexboxRefApartment.current?.name);
+    if (this.transferRefyes && this.transferRefyes.current?.checked) card.transfer = 'yes';
+    if (this.transferRefno && this.transferRefno.current?.checked) card.transfer = 'no';
+    if (this.fileRef && this.fileRef.current && this.fileRef.current.files)
+      card.file = URL.createObjectURL(this.fileRef.current.files[0]);
+    const updatedSt = this.state;
+    updatedSt.cards.push(card);
+    this.setState(updatedSt);
+  };
+
   render() {
     return (
-      <form className='forms-wrapper' ref={this.formRef} onSubmit={(event) => this.handleFormSubmit(event)}>
-        <div className='input-wrapper'>
-          <label htmlFor='name' className='label'>
-            Name: <span className='error'>{this.state.nameError}</span>
-          </label>
-          <input
-            id='name'
-            type='text'
-            required
-            ref={this.nameRef}
-            className='input-name'
-            placeholder='Enter your name here'
-          ></input>
-        </div>
-        <div className='input-wrapper'>
-          <label htmlFor='date' className='label'>
-            Visit date:
-          </label>
-          <input
-            id='date'
-            type='date'
-            ref={this.dateRef}
-            defaultValue={new Date().toISOString().slice(0, 10)}
-            min={new Date().toISOString().slice(0, 10)}
-            className='input-date'
-          ></input>
-        </div>
-        <div className='input-wrapper'>
-          <label htmlFor='select' className='label'>
-            Purpose of the visit: <span className='error'>{this.state.selectError}</span>
-          </label>
-          <select id='select' required defaultValue='Select a purpose' className='input-select' ref={this.purposeRef}>
-            <option>Select a purpose</option>
-            <option>To buy a real state</option>
-            <option>To rent a real state</option>
-          </select>
-        </div>
-        <div className='input-wrapper'>
-          <p className='label'>
-            What type of real estate are you interested in? <span className='error'>{this.state.checkboxError}</span>
-          </p>
-          {this.state.checkboxes.map((box) => (
-            <label className='' key={box.name}>
-              <input name={box.name} defaultChecked={false} type='checkbox' ref={this.chexboxRef}></input>
-              {box.name}
+      <>
+        <form className='forms-wrapper' ref={this.formRef} onSubmit={(event) => this.handleFormSubmit(event)}>
+          <div className='input-wrapper'>
+            <label htmlFor='name' className='label'>
+              Name: <span className='error'>{this.state.nameError}</span>
             </label>
-          ))}
+            <input
+              id='name'
+              type='text'
+              required
+              ref={this.nameRef}
+              className='input-name'
+              placeholder='Enter your name here'
+            ></input>
+          </div>
+          <div className='input-wrapper'>
+            <label htmlFor='date' className='label'>
+              Visit date:
+            </label>
+            <input
+              id='date'
+              type='date'
+              ref={this.dateRef}
+              defaultValue={new Date().toISOString().slice(0, 10)}
+              min={new Date().toISOString().slice(0, 10)}
+              className='input-date'
+            ></input>
+          </div>
+          <div className='input-wrapper'>
+            <label htmlFor='select' className='label'>
+              Purpose of the visit: <span className='error'>{this.state.selectError}</span>
+            </label>
+            <select id='select' required defaultValue='Select a purpose' className='input-select' ref={this.purposeRef}>
+              <option>Select a purpose</option>
+              <option>To buy a real state</option>
+              <option>To rent a real state</option>
+            </select>
+          </div>
+          <div className='input-wrapper'>
+            <p className='label'>
+              What type of real estate are you interested in? <span className='error'>{this.state.checkboxError}</span>
+            </p>
+            <label>
+              <input name='Villa' defaultChecked={false} type='checkbox' ref={this.chexboxRefVilla}></input>
+              Villa
+            </label>
+            <label>
+              <input name='Apartment' defaultChecked={false} type='checkbox' ref={this.chexboxRefApartment}></input>
+              Apartment
+            </label>
+          </div>
+          <div className='input-wrapper'>
+            <p className='label'>Do you need a transfer from airport?</p>
+            <label>
+              <input name='transfer' type='radio' required ref={this.transferRefyes} defaultValue='yes'></input>
+              Yes
+            </label>
+            <label>
+              <input name='transfer' type='radio' required ref={this.transferRefno} defaultValue='no'></input>
+              No
+            </label>
+          </div>
+          <div className='input-wrapper'>
+            <p className='label'>Upload a photo:</p>
+            <input type='file' ref={this.fileRef} required accept='image/*,.png,.jpg'></input>
+          </div>
+          <button className='button'>Submit</button>
+        </form>
+        <div className='cards-collection'>
+          {this.state.cards.map((card, index) => {
+            if (index > 0) {
+              return <CardInForms card={card} key={card.name} />;
+            }
+          })}
         </div>
-        <div className='input-wrapper'>
-          <p className='label'>Do you need a transfer from airport?</p>
-          <label>
-            <input name='transfer' type='radio' required ref={this.transferRef} defaultValue='yes'></input>
-            Yes
-          </label>
-          <label>
-            <input name='transfer' type='radio' required ref={this.transferRef} defaultValue='no'></input>
-            No
-          </label>
-        </div>
-        <div className='input-wrapper'>
-          <p className='label'>Upload a photo:</p>
-          <input type='file' ref={this.fileRef} required accept='image/*,.png,.jpg'></input>
-          {/* {this.state.file && <img src={this.state.file} alt='uploaded pic'></img>} */}
-          {/* {this.fileRef.current && this.fileRef.current.files && (
-            <img
-              src={URL.createObjectURL(this.fileRef.current.files[0])}
-              alt='uploaded pic'
-              className='uploaded-pic'
-            ></img>
-          )} */}
-        </div>
-        <button className='button'>Submit</button>
-      </form>
+      </>
     );
   }
 }
