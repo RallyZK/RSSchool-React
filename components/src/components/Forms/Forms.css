@@ -25,9 +25,15 @@ h3, h5, p {
   height: 25px;
 }
 
+.uploaded-pic {
+  width: 200px;
+  height: 150px;
+}
+
 .error {
   color: #ff006b;
 }
+
 
 .button {
   border-radius: 25px;

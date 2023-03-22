@@ -24,12 +24,15 @@ export interface ICheckBox {
   checked: boolean;
 }
 
+export interface IFormsState {
+  nameError: string;
+  selectError: string;
+  // checkboxes: ICheckBox[];
+  checkboxError: string;
+}
+
 export const emptyState = {
-  name: '',
   nameError: '',
-  date: new Date().toISOString().slice(0, 10),
-  dateError: '',
-  select: 'Select a purpose',
   selectError: '',
   checkboxes: [
     { name: 'Villa', checked: false },
@@ -37,10 +40,6 @@ export const emptyState = {
     { name: 'Apartment', checked: false },
   ],
   checkboxError: '',
-  radio: '',
-  radioError: '',
-  file: '',
-  fileError: '',
 };
 
 export const allFormCards: IFormCard[] = [];

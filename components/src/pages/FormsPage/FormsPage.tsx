@@ -2,6 +2,7 @@ import './FormsPage.css';
 import React, { Component } from 'react';
 import Forms from '../../components/Forms';
 import FormCardsCollection from '../../components/FormCardsCollection';
+import { emptyState } from '../../utils/types';
 
 class FormsPage extends Component {
   render() {
