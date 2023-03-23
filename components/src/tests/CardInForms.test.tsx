@@ -1,6 +1,6 @@
 import React from 'react';
 import CardInForms from '../components/CardInForms';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 describe('CardInForms test', () => {
   test('CardInForms renders correctly', () => {
@@ -13,12 +13,12 @@ describe('CardInForms test', () => {
       file: 'url',
     };
     render(<CardInForms card={testInfo} />);
+    expect(screen.getByRole('heading', { name: /test name/i })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /test name/i })).toBeInTheDocument();
     expect(screen.getByText(/test name/i)).toBeInTheDocument();
     expect(screen.getByText(/test purpose/i)).toBeInTheDocument();
     expect(screen.getByText(/test1/i)).toBeInTheDocument();
     expect(screen.getByText(/test2/i)).toBeInTheDocument();
     expect(screen.getByText(/yes/i)).toBeInTheDocument();
-    // expect(screen.getByText(/4/i)).toBeInTheDocument();
-    // expect(screen.getByText(/5/i)).toBeInTheDocument();
   });
 });

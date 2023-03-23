@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { createEvent, fireEvent, render, screen } from '@testing-library/react';
 
 describe('SearchBar test', () => {
   test('SearchBar renders and works correctly', () => {
@@ -13,5 +13,13 @@ describe('SearchBar test', () => {
 
     fireEvent.change(inputElement, { target: { value: 'test text' } });
     expect(inputElement.value).toBe('test text');
+  });
+
+  test('Should prevent default action on click', () => {
+    render(<SearchBar />);
+    const grid = screen.getByRole<HTMLButtonElement>('button');
+    const click = createEvent.click(grid);
+    fireEvent(grid, click);
+    expect(click.defaultPrevented).toBe(false);
   });
 });

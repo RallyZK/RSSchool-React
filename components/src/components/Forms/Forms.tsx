@@ -51,17 +51,9 @@ class Forms extends Component {
   };
 
   checkRadioBtns = () => {
-    console.log(this.transferRefyes && this.transferRefyes.current?.checked);
-    console.log(this.transferRefno && this.transferRefno.current?.checked);
     if (
-      (this.transferRefyes &&
-        this.transferRefyes.current?.checked &&
-        this.transferRefno &&
-        !this.transferRefno.current?.checked) ||
-      (this.transferRefyes &&
-        !this.transferRefyes.current?.checked &&
-        this.transferRefno &&
-        this.transferRefno.current?.checked)
+      (this.transferRefyes?.current?.checked && !this.transferRefno.current?.checked) ||
+      (!this.transferRefyes?.current?.checked && this.transferRefno.current?.checked)
     ) {
       this.setState({ radioError: '' });
     } else {

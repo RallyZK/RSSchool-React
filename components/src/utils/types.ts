@@ -19,15 +19,6 @@ export interface IFormCard {
   file: string;
 }
 
-// export interface IFormCardNew {
-//   name: string | undefined;
-//   date: string | undefined;
-//   purpose: string | undefined;
-//   realEstate: (string | undefined)[];
-//   transfer: string | undefined;
-//   file: string | undefined;
-// }
-
 export interface ICheckBox {
   name: string;
   checked: boolean;
