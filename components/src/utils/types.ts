@@ -37,6 +37,7 @@ export interface IFormsState {
   nameError: string;
   selectError: string;
   checkboxError: string;
+  radioError: string;
   cards: IFormCard[];
   isFormFilled: boolean;
 }
@@ -45,6 +46,7 @@ export const emptyState = {
   nameError: '',
   selectError: '',
   checkboxError: '',
+  radioError: '',
   cards: [
     {
       name: '',

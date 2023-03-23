@@ -52,6 +52,17 @@ class Forms extends Component {
     this.setState({ checkboxError: err });
   };
 
+  checkRadioBtns = () => {
+    if (
+      (this.transferRefyes && this.transferRefyes.current?.checked) ||
+      (this.transferRefno && this.transferRefno.current?.checked)
+    ) {
+      this.setState({ radioError: '' });
+    } else {
+      this.setState({ radioError: 'Select something' });
+    }
+  };
+
   clearForm = () => {
     this.formRef.current && this.formRef.current.reset();
   };
@@ -92,6 +103,7 @@ class Forms extends Component {
     await this.checkName();
     await this.checkSelect();
     await this.checkCheckboxes();
+    await this.checkRadioBtns();
     if (this.state.nameError === '' && this.state.selectError === '' && this.state.checkboxError === '') {
       this.createCardInfo();
       this.openModal();
@@ -111,7 +123,6 @@ class Forms extends Component {
             <input
               id='name'
               type='text'
-              required
               ref={this.nameRef}
               className='input-name'
               placeholder='Enter your name here'
@@ -134,7 +145,7 @@ class Forms extends Component {
             <label htmlFor='select' className='label'>
               Purpose of the visit: <span className='error'>{this.state.selectError}</span>
             </label>
-            <select id='select' required defaultValue='Select a purpose' className='input-select' ref={this.purposeRef}>
+            <select id='select' defaultValue='Select a purpose' className='input-select' ref={this.purposeRef}>
               <option>Select a purpose</option>
               <option>To buy a real state</option>
               <option>To rent a real state</option>
@@ -154,13 +165,16 @@ class Forms extends Component {
             </label>
           </div>
           <div className='input-wrapper'>
-            <p className='label'>Do you need a transfer from the airport?</p>
+            <p className='label'>
+              Do you need a transfer from the airport?
+              <span className='error'>{this.state.radioError}</span>
+            </p>
             <label>
-              <input name='transfer' type='radio' required ref={this.transferRefyes} defaultValue='yes'></input>
+              <input name='transfer' type='radio' ref={this.transferRefyes} defaultValue='yes'></input>
               Yes
             </label>
             <label>
-              <input name='transfer' type='radio' required ref={this.transferRefno} defaultValue='no'></input>
+              <input name='transfer' type='radio' ref={this.transferRefno} defaultValue='no'></input>
               No
             </label>
           </div>

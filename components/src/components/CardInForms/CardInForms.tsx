@@ -23,7 +23,7 @@ class FormCard extends Component<Props> {
             <span className='span'>Transfer is needed:</span> {this.props.card.transfer}
           </p>
           <p className='form-card-desc'>
-            <span className='span'>Interested in:</span> {this.props.card.realEstate.join(', ')}{' '}
+            <span className='span'>Interested in:</span> {this.props.card.realEstate.join(' ')}
           </p>
         </div>
       </div>
