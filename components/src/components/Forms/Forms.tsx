@@ -5,7 +5,6 @@ import CardInForms from '../CardInForms';
 
 class Forms extends Component {
   state = emptyState;
-  cards = [];
 
   formRef = React.createRef<HTMLFormElement>();
   nameRef = React.createRef<HTMLInputElement>();
@@ -47,15 +46,14 @@ class Forms extends Component {
   };
 
   handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    this.checkName();
-    this.checkSelect();
-    this.checkCheckboxes();
-    if (!this.state.nameError && !this.state.selectError && !this.state.checkboxError) {
+    await this.checkName();
+    await this.checkSelect();
+    await this.checkCheckboxes();
+    if (this.state.nameError === '' && this.state.selectError === '' && this.state.checkboxError === '') {
       this.createCardInfo();
-      console.log('state:::', this.state);
       this.clearForm();
     }
+    event.preventDefault();
   };
 
   clearForm = () => {
@@ -92,9 +90,9 @@ class Forms extends Component {
     if (this.transferRefno && this.transferRefno.current?.checked) card.transfer = 'no';
     if (this.fileRef && this.fileRef.current && this.fileRef.current.files)
       card.file = URL.createObjectURL(this.fileRef.current.files[0]);
-    const updatedSt = this.state;
-    updatedSt.cards.push(card);
-    this.setState(updatedSt);
+    const updatedCards = this.state.cards.map((el) => el);
+    updatedCards.push(card);
+    this.setState({ cards: updatedCards });
   };
 
   render() {
