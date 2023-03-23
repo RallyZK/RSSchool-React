@@ -28,15 +28,14 @@ class Forms extends Component {
     ) {
       err = 'Name should starts with a capital letter';
     } else if (this.nameRef.current && !this.nameRef.current.value.trim().match(REG_EXP)) {
-      err = 'Please write your name in latin characters';
+      err = 'Please write your name only in latin characters';
     }
     this.setState({ nameError: err });
   };
 
   checkSelect = (): void => {
     if (this.purposeRef.current) {
-      const err = this.purposeRef.current.value === 'Select a purpose' ? 'Select a purpose' : '';
-      this.setState({ selectError: err });
+      this.setState({ selectError: this.purposeRef.current.value === 'Select a purpose' ? 'Select a purpose' : '' });
     }
   };
 
@@ -48,18 +47,33 @@ class Forms extends Component {
     if (this.chexboxRefApartment.current) {
       checkedCount = this.chexboxRefApartment.current.checked ? checkedCount + 1 : checkedCount + 0;
     }
-    const err = checkedCount === 0 ? 'Select something' : '';
-    this.setState({ checkboxError: err });
+    this.setState({ checkboxError: checkedCount === 0 ? 'Select something' : '' });
   };
 
   checkRadioBtns = () => {
+    console.log(this.transferRefyes && this.transferRefyes.current?.checked);
+    console.log(this.transferRefno && this.transferRefno.current?.checked);
     if (
-      (this.transferRefyes && this.transferRefyes.current?.checked) ||
-      (this.transferRefno && this.transferRefno.current?.checked)
+      (this.transferRefyes &&
+        this.transferRefyes.current?.checked &&
+        this.transferRefno &&
+        !this.transferRefno.current?.checked) ||
+      (this.transferRefyes &&
+        !this.transferRefyes.current?.checked &&
+        this.transferRefno &&
+        this.transferRefno.current?.checked)
     ) {
       this.setState({ radioError: '' });
     } else {
       this.setState({ radioError: 'Select something' });
+    }
+  };
+
+  checkFile = () => {
+    if (this.fileRef && this.fileRef.current && this.fileRef.current.files?.length) {
+      this.setState({ fileError: '' });
+    } else {
+      this.setState({ fileError: 'Please, upload a photo' });
     }
   };
 
@@ -104,7 +118,14 @@ class Forms extends Component {
     await this.checkSelect();
     await this.checkCheckboxes();
     await this.checkRadioBtns();
-    if (this.state.nameError === '' && this.state.selectError === '' && this.state.checkboxError === '') {
+    await this.checkFile();
+    if (
+      !this.state.nameError &&
+      !this.state.selectError &&
+      !this.state.checkboxError &&
+      !this.state.radioError &&
+      !this.state.fileError
+    ) {
       this.createCardInfo();
       this.openModal();
       this.clearForm();
@@ -179,8 +200,10 @@ class Forms extends Component {
             </label>
           </div>
           <div className='input-wrapper'>
-            <p className='label'>Upload a photo:</p>
-            <input type='file' ref={this.fileRef} required accept='image/*,.png,.jpg'></input>
+            <p className='label'>
+              Upload a photo: <span className='error'>{this.state.fileError}</span>
+            </p>
+            <input type='file' ref={this.fileRef} accept='image/*,.png,.jpg'></input>
           </div>
           <button className='button'>Submit</button>
         </form>

@@ -23,6 +23,7 @@ h3, h5, p {
 .input-date,
 .input-select {
   height: 25px;
+  padding: 0 5px;
 }
 
 .uploaded-pic {
