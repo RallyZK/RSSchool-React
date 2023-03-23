@@ -19,6 +19,15 @@ export interface IFormCard {
   file: string;
 }
 
+// export interface IFormCardNew {
+//   name: string | undefined;
+//   date: string | undefined;
+//   purpose: string | undefined;
+//   realEstate: (string | undefined)[];
+//   transfer: string | undefined;
+//   file: string | undefined;
+// }
+
 export interface ICheckBox {
   name: string;
   checked: boolean;
@@ -27,12 +36,10 @@ export interface ICheckBox {
 export interface IFormsState {
   nameError: string;
   selectError: string;
-  // checkboxes: ICheckBox[];
   checkboxError: string;
   cards: IFormCard[];
+  isFormFilled: boolean;
 }
-
-export const allFormCards: IFormCard[] = [];
 
 export const emptyState = {
   nameError: '',
@@ -48,4 +55,5 @@ export const emptyState = {
       file: '',
     },
   ],
+  isFormFilled: false,
 };

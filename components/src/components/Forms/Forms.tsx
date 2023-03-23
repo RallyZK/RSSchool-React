@@ -18,11 +18,17 @@ class Forms extends Component {
   fileRef = React.createRef<HTMLInputElement>();
 
   checkName = (): void => {
+    const REG_EXP = /^[a-zA-Z]+$/;
     let err = '';
-    if (this.nameRef.current && this.nameRef.current.value.length < 2) {
+    if (this.nameRef.current && this.nameRef.current.value.trim().length < 2) {
       err = 'Name should contain min 2 characters';
-    } else if (this.nameRef.current && this.nameRef.current.value[0].toUpperCase() !== this.nameRef.current.value[0]) {
+    } else if (
+      this.nameRef.current &&
+      this.nameRef.current.value.trim()[0].toUpperCase() !== this.nameRef.current.value[0]
+    ) {
       err = 'Name should starts with a capital letter';
+    } else if (this.nameRef.current && !this.nameRef.current.value.trim().match(REG_EXP)) {
+      err = 'Please write your name in latin characters';
     }
     this.setState({ nameError: err });
   };
@@ -46,30 +52,11 @@ class Forms extends Component {
     this.setState({ checkboxError: err });
   };
 
-  handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    await this.checkName();
-    await this.checkSelect();
-    await this.checkCheckboxes();
-    if (this.state.nameError === '' && this.state.selectError === '' && this.state.checkboxError === '') {
-      this.createCardInfo();
-      this.clearForm();
-    }
-    event.preventDefault();
-  };
-
   clearForm = () => {
     this.formRef.current && this.formRef.current.reset();
   };
 
   createCardInfo = () => {
-    // const card: IFormCard2 = {
-    //   name: '',
-    //   date: '',
-    //   purpose: '',
-    //   realEstate: [],
-    //   transfer: '',
-    //   file: '',
-    // };
     const card2: IFormCard = {
       name: this.nameRef && this.nameRef.current ? this.nameRef.current.value : '',
       date: this.dateRef && this.dateRef.current ? this.dateRef.current.value : '',
@@ -88,31 +75,29 @@ class Forms extends Component {
           ? URL.createObjectURL(this.fileRef.current.files[0])
           : '',
     };
-    // if (this.nameRef && this.nameRef.current) card.name = this.nameRef.current.value;
-    // if (this.dateRef && this.dateRef.current) card.date = this.dateRef.current.value;
-    // if (this.purposeRef && this.purposeRef.current) card.purpose = this.purposeRef.current.value;
-    // if (
-    //   this.chexboxRefVilla &&
-    //   this.chexboxRefVilla.current?.checked &&
-    //   this.chexboxRefVilla.current?.name &&
-    //   card.realEstate
-    // )
-    //   card.realEstate.push(this.chexboxRefVilla.current?.name);
-    // if (
-    //   this.chexboxRefApartment &&
-    //   this.chexboxRefApartment.current?.checked &&
-    //   this.chexboxRefApartment.current?.name &&
-    //   card.realEstate
-    // )
-    //   card.realEstate.push(this.chexboxRefApartment.current?.name);
-    // card.transfer = this.transferRefyes && this.transferRefyes.current?.checked ? 'yes' : 'no';
-    // if (this.transferRefyes && this.transferRefyes.current?.checked) card.transfer = 'yes';
-    // if (this.transferRefno && this.transferRefno.current?.checked) card.transfer = 'no';
-    // if (this.fileRef && this.fileRef.current && this.fileRef.current.files)
-    //   card.file = URL.createObjectURL(this.fileRef.current.files[0]);
     const updatedCards = this.state.cards.map((el) => el);
     updatedCards.push(card2);
     this.setState({ cards: updatedCards });
+  };
+
+  openModal = () => {
+    this.setState({ isFormFilled: true });
+    const timer = setTimeout(() => {
+      this.setState({ isFormFilled: false });
+      clearTimeout(timer);
+    }, 5000);
+  };
+
+  handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    await this.checkName();
+    await this.checkSelect();
+    await this.checkCheckboxes();
+    if (this.state.nameError === '' && this.state.selectError === '' && this.state.checkboxError === '') {
+      this.createCardInfo();
+      this.openModal();
+      this.clearForm();
+    }
+    event.preventDefault();
   };
 
   render() {
@@ -169,7 +154,7 @@ class Forms extends Component {
             </label>
           </div>
           <div className='input-wrapper'>
-            <p className='label'>Do you need a transfer from airport?</p>
+            <p className='label'>Do you need a transfer from the airport?</p>
             <label>
               <input name='transfer' type='radio' required ref={this.transferRefyes} defaultValue='yes'></input>
               Yes
@@ -191,6 +176,10 @@ class Forms extends Component {
               return <CardInForms card={card} key={card.name} />;
             }
           })}
+        </div>
+        <div className={`modal-wrapper ${this.state.isFormFilled ? '' : 'display-none'}`}>
+          <div className='modal-img'></div>
+          <h2 className='modal-title'>You information is successfully saved!</h2>
         </div>
       </>
     );
