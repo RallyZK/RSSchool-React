@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import './Forms.css';
 import React, { Component } from 'react';
 import { emptyState, IFormCard } from '../../utils/types';
@@ -61,37 +62,56 @@ class Forms extends Component {
   };
 
   createCardInfo = () => {
-    const card: IFormCard = {
-      name: '',
-      date: '',
-      purpose: '',
-      realEstate: [],
-      transfer: '',
-      file: '',
+    // const card: IFormCard2 = {
+    //   name: '',
+    //   date: '',
+    //   purpose: '',
+    //   realEstate: [],
+    //   transfer: '',
+    //   file: '',
+    // };
+    const card2: IFormCard = {
+      name: this.nameRef && this.nameRef.current ? this.nameRef.current.value : '',
+      date: this.dateRef && this.dateRef.current ? this.dateRef.current.value : '',
+      purpose: this.purposeRef && this.purposeRef.current ? this.purposeRef.current.value : '',
+      realEstate: [
+        this.chexboxRefVilla && this.chexboxRefVilla.current?.checked && this.chexboxRefVilla.current?.name
+          ? this.chexboxRefVilla.current.name
+          : '',
+        this.chexboxRefApartment && this.chexboxRefApartment.current?.checked && this.chexboxRefApartment.current?.name
+          ? this.chexboxRefApartment.current.name
+          : '',
+      ],
+      transfer: this.transferRefyes && this.transferRefyes.current?.checked ? 'yes' : 'no',
+      file:
+        this.fileRef && this.fileRef.current && this.fileRef.current.files
+          ? URL.createObjectURL(this.fileRef.current.files[0])
+          : '',
     };
-    if (this.nameRef && this.nameRef.current) card.name = this.nameRef.current.value;
-    if (this.dateRef && this.dateRef.current) card.date = this.dateRef.current.value;
-    if (this.purposeRef && this.purposeRef.current) card.purpose = this.purposeRef.current.value;
-    if (
-      this.chexboxRefVilla &&
-      this.chexboxRefVilla.current?.checked &&
-      this.chexboxRefVilla.current?.name &&
-      card.realEstate
-    )
-      card.realEstate.push(this.chexboxRefVilla.current?.name);
-    if (
-      this.chexboxRefApartment &&
-      this.chexboxRefApartment.current?.checked &&
-      this.chexboxRefApartment.current?.name &&
-      card.realEstate
-    )
-      card.realEstate.push(this.chexboxRefApartment.current?.name);
-    if (this.transferRefyes && this.transferRefyes.current?.checked) card.transfer = 'yes';
-    if (this.transferRefno && this.transferRefno.current?.checked) card.transfer = 'no';
-    if (this.fileRef && this.fileRef.current && this.fileRef.current.files)
-      card.file = URL.createObjectURL(this.fileRef.current.files[0]);
+    // if (this.nameRef && this.nameRef.current) card.name = this.nameRef.current.value;
+    // if (this.dateRef && this.dateRef.current) card.date = this.dateRef.current.value;
+    // if (this.purposeRef && this.purposeRef.current) card.purpose = this.purposeRef.current.value;
+    // if (
+    //   this.chexboxRefVilla &&
+    //   this.chexboxRefVilla.current?.checked &&
+    //   this.chexboxRefVilla.current?.name &&
+    //   card.realEstate
+    // )
+    //   card.realEstate.push(this.chexboxRefVilla.current?.name);
+    // if (
+    //   this.chexboxRefApartment &&
+    //   this.chexboxRefApartment.current?.checked &&
+    //   this.chexboxRefApartment.current?.name &&
+    //   card.realEstate
+    // )
+    //   card.realEstate.push(this.chexboxRefApartment.current?.name);
+    // card.transfer = this.transferRefyes && this.transferRefyes.current?.checked ? 'yes' : 'no';
+    // if (this.transferRefyes && this.transferRefyes.current?.checked) card.transfer = 'yes';
+    // if (this.transferRefno && this.transferRefno.current?.checked) card.transfer = 'no';
+    // if (this.fileRef && this.fileRef.current && this.fileRef.current.files)
+    //   card.file = URL.createObjectURL(this.fileRef.current.files[0]);
     const updatedCards = this.state.cards.map((el) => el);
-    updatedCards.push(card);
+    updatedCards.push(card2);
     this.setState({ cards: updatedCards });
   };
 
