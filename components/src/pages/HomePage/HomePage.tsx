@@ -1,9 +1,9 @@
 import './HomePage.css';
 import React, { Component } from 'react';
-import Card from '../../components/Card';
+import Card from '../../components/Card/Card';
 import { IHouse } from '../../utils/types';
 import { catalog } from '../../utils/catalog';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 class HomePage extends Component {
   catalogForRender: IHouse[] | undefined = catalog;

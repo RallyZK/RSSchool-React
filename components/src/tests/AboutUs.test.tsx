@@ -1,5 +1,5 @@
 import React from 'react';
-import AboutUs from '../pages/AboutUs';
+import AboutUs from '../pages/AboutUs/AboutUs';
 import { render, screen } from '@testing-library/react';
 
 describe('AboutUs test', () => {

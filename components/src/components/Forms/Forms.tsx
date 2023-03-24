@@ -2,7 +2,7 @@
 import './Forms.css';
 import React, { Component } from 'react';
 import { emptyState, IFormCard } from '../../utils/types';
-import CardInForms from '../CardInForms';
+import CardInForms from '../CardInForms/CardInForms';
 
 class Forms extends Component {
   state = emptyState;

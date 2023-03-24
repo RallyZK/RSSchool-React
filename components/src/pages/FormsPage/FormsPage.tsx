@@ -1,6 +1,6 @@
 import './FormsPage.css';
 import React, { Component } from 'react';
-import Forms from '../../components/Forms';
+import Forms from '../../components/Forms/Forms';
 
 class FormsPage extends Component {
   render() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import { createEvent, fireEvent, render, screen } from '@testing-library/react';
 
 describe('SearchBar test', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import CardInForms from '../components/CardInForms';
+import CardInForms from '../components/CardInForms/CardInForms';
 import { render, screen } from '@testing-library/react';
 
 describe('CardInForms test', () => {

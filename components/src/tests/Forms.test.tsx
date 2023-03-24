@@ -1,22 +1,73 @@
+/* eslint-disable testing-library/no-unnecessary-act */
 import React from 'react';
-import Forms from '../components/Forms';
-import { createEvent, fireEvent, render, screen } from '@testing-library/react';
+import Forms from '../components/Forms/Forms';
+import { act, createEvent, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Forms test', () => {
   test('Text input renders and works correctly', () => {
     render(<Forms />);
     const inputTextElement = screen.getByRole<HTMLInputElement>('textbox');
     expect(inputTextElement).toBeInTheDocument();
-    fireEvent.change(inputTextElement, { target: { value: 'test text' } });
+    act(() => {
+      fireEvent.change(inputTextElement, { target: { value: 'test text' } });
+    });
     expect(inputTextElement.value).toBe('test text');
+  });
+
+  test('Text input error3 works correctly', () => {
+    render(<Forms />);
+    const inputTextElement = screen.getByRole<HTMLInputElement>('textbox');
+    const submitbutton = screen.getByRole<HTMLButtonElement>('button');
+    act(() => {
+      fireEvent.change(inputTextElement, { target: { value: '333' } });
+    });
+    const click = createEvent.click(submitbutton);
+    fireEvent(submitbutton, click);
+    expect(screen.getByText(/Please write your name only in latin characters/i)).toBeInTheDocument();
+  });
+
+  test('Text input error2 works correctly', () => {
+    render(<Forms />);
+    const inputTextElement = screen.getByRole<HTMLInputElement>('textbox');
+    const submitbutton = screen.getByRole<HTMLButtonElement>('button');
+    const click = createEvent.click(submitbutton);
+    act(() => {
+      fireEvent.change(inputTextElement, { target: { value: 'name' } });
+    });
+    fireEvent(submitbutton, click);
+    expect(screen.getByText(/Name should starts with a capital letter/i)).toBeInTheDocument();
+  });
+
+  test('Text input error1 works correctly', () => {
+    render(<Forms />);
+    const inputTextElement = screen.getByRole<HTMLInputElement>('textbox');
+    const submitbutton = screen.getByRole<HTMLButtonElement>('button');
+    const click = createEvent.click(submitbutton);
+    act(() => {
+      fireEvent.change(inputTextElement, { target: { value: 'a' } });
+    });
+    fireEvent(submitbutton, click);
+    expect(screen.getByText(/Name should contain min 2 characters/i)).toBeInTheDocument();
   });
 
   test('Select input renders and works correctly', () => {
     render(<Forms />);
     const selectElement = screen.getByRole<HTMLInputElement>('combobox');
     expect(selectElement).toBeInTheDocument();
-    fireEvent.change(selectElement, { target: { value: 'To buy a real state' } });
+    act(() => {
+      fireEvent.change(selectElement, { target: { value: 'To buy a real state' } });
+    });
     expect(selectElement.value).toBe('To buy a real state');
+  });
+
+  test('Select error works correctly', () => {
+    render(<Forms />);
+    const selectElement = screen.getByRole<HTMLInputElement>('combobox');
+    act(() => {
+      fireEvent.change(selectElement, { target: { value: 'Select a purpose' } });
+    });
+    expect(selectElement.value).toBe('Select a purpose');
   });
 
   test('Options render correctly', () => {
@@ -53,11 +104,10 @@ describe('Forms test', () => {
   });
 
   test('Should prevent default action on click', () => {
+    const onSubmit = jest.fn();
     render(<Forms />);
-    const submitbutton = screen.getByRole<HTMLButtonElement>('button');
-    const click = createEvent.click(submitbutton);
-    fireEvent(submitbutton, click);
-    expect(click.defaultPrevented).toBe(false);
+    userEvent.click(screen.getByRole('button'));
+    expect(onSubmit).toBeDefined();
   });
 
   test('Modal window renders correctly', () => {

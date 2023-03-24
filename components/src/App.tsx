@@ -1,10 +1,10 @@
 import './App.css';
-import AboutUs from './pages/AboutUs';
-import Error404 from './pages/Error404';
-import HomePage from './pages/HomePage';
 import React, { Component } from 'react';
-import Layout from './components/Layout';
-import FormsPage from './pages/FormsPage';
+import AboutUs from './pages/AboutUs/AboutUs';
+import Error404 from './pages/Error404/Error404';
+import HomePage from './pages/HomePage/HomePage';
+import Layout from './components/Layout/Layout';
+import FormsPage from './pages/FormsPage/FormsPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 class App extends Component {
