@@ -1,0 +1,49 @@
+h3, h5, p {
+  margin: 0;
+}
+
+.forms-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 470px;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.input-name,
+.input-date,
+.input-select {
+  height: 25px;
+}
+
+.error {
+  color: #ff006b;
+}
+
+.button {
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all ease-in;
+  transition-duration: 200ms;
+  border: 2px solid #38bdf8;
+  background-color: #38bdf8;
+  width: 120px;
+  height: 35px;
+  margin: 20px auto;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: transparent;
+  border: 2px solid #38bdf8;
+}
