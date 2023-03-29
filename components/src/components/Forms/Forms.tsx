@@ -3,7 +3,8 @@ import './Forms.css';
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CardInForms from '../CardInForms/CardInForms';
-import { emptyState, IFormCard } from '../../utils/types';
+import { emptyState, IFormCard, IOption } from '../../utils/types';
+import ReactSelect from 'react-select';
 interface FormsProps {
   setCards: Dispatch<SetStateAction<never[]>>;
 }
@@ -17,27 +18,24 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
     reset,
   } = useForm();
 
-  // checkName = (): void => {
-  //   const REG_EXP = /^[a-zA-Z]+$/;
-  //   let err = '';
-  //   if (this.nameRef.current && this.nameRef.current.value.trim().length < 2) {
-  //     err = 'Name should contain min 2 characters';
-  //   } else if (
-  //     this.nameRef.current &&
-  //     this.nameRef.current.value.trim()[0].toUpperCase() !== this.nameRef.current.value[0]
-  //   ) {
-  //     err = 'Name should starts with a capital letter';
-  //   } else if (this.nameRef.current && !this.nameRef.current.value.trim().match(REG_EXP)) {
-  //     err = 'Please write your name only in latin characters';
-  //   }
-  //   this.setState({ nameError: err });
-  // };
-
-  // checkSelect = (): void => {
-  //   if (this.purposeRef.current) {
-  //     this.setState({ selectError: this.purposeRef.current.value === 'Select a purpose' ? 'Select a purpose' : '' });
-  //   }
-  // };
+  const options: IOption[] = [
+    {
+      value: 'To buy a real state',
+      label: 'To buy a real state',
+    },
+    {
+      value: 'To rent a real state',
+      label: 'To rent a real state',
+    },
+  ];
+  const checkboxOptions = [
+    {
+      value: 'yes',
+    },
+    {
+      value: 'no',
+    },
+  ];
 
   // checkCheckboxes = (): void => {
   //   let checkedCount = 0;
@@ -48,17 +46,6 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
   //     checkedCount = this.chexboxRefApartment.current.checked ? checkedCount + 1 : checkedCount + 0;
   //   }
   //   this.setState({ checkboxError: checkedCount === 0 ? 'Select something' : '' });
-  // };
-
-  // checkRadioBtns = () => {
-  //   if (
-  //     (this.transferRefyes?.current?.checked && !this.transferRefno.current?.checked) ||
-  //     (!this.transferRefyes?.current?.checked && this.transferRefno.current?.checked)
-  //   ) {
-  //     this.setState({ radioError: '' });
-  //   } else {
-  //     this.setState({ radioError: 'Select something' });
-  //   }
   // };
 
   // checkFile = () => {
@@ -133,6 +120,8 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
     console.log(typeof errors.name?.message);
   };
 
+  const getValue = (value: string) => (value ? options.find((option) => option.value === value) : '');
+
   return (
     <>
       <form className='forms-wrapper' onSubmit={handleSubmit(onSubmit)}>
@@ -172,63 +161,93 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
                 message: 'You have selected a past date',
               },
             })}
-            // min={new Date().toISOString().slice(0, 10)}
             className='input-date'
           ></input>
         </div>
+        <Controller
+          control={control}
+          name='purpose'
+          rules={{
+            required: 'Please, select a purpose',
+          }}
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
+            <div className='input-wrapper'>
+              <label htmlFor='select' className='label'>
+                Purpose of the visit: <span className='error'>{error && error.message}</span>
+              </label>
+              <ReactSelect
+                className='input-select'
+                options={options}
+                placeholder={'Select a purpose'}
+                value={getValue(value)}
+                onChange={(newValue) => onChange((newValue as IOption).value)}
+              />
+            </div>
+          )}
+        />
         <div className='input-wrapper'>
-          <label htmlFor='select' className='label'>
-            Purpose of the visit: <span className='error'>{errors?.purpose?.message?.toString()}</span>
-          </label>
-          <select
-            id='select'
-            defaultValue='Select a purpose'
-            className='input-select'
-            {...register('purpose', {
-              required: 'Please, select a purpose',
-              validate: {
-                notDefault: (option) => option !== '0',
-              },
-            })}
-          >
-            <option value='0'>Select a purpose</option>
-            <option value='1'>To buy a real state</option>
-            <option value='2'>To rent a real state</option>
-          </select>
-        </div>
-        {/* <div className='input-wrapper'>
           <p className='label'>
-            What type of real estate are you interested in? <span className='error'>{this.state.checkboxError}</span>
+            What type of real estate are you interested in?{' '}
+            <span className='error'>{errors.rstypes?.message?.toString()}</span>
           </p>
           <label>
-            <input name='Villa' defaultChecked={false} type='checkbox' ref={this.chexboxRefVilla}></input>
+            <input
+              {...register('rstypes', { deps: ['Villa', 'Apartment'] })}
+              name='Villa'
+              type='checkbox'
+              value='Villa'
+              // onChange={changeHandler}
+            ></input>
             Villa
           </label>
           <label>
-            <input name='Apartment' defaultChecked={false} type='checkbox' ref={this.chexboxRefApartment}></input>
+            <input
+              {...register('rstypes', { deps: ['Villa', 'Apartment'] })}
+              name='Apartment'
+              type='checkbox'
+              value='Apartment'
+              // onChange={changeHandler}
+            ></input>
             Apartment
           </label>
         </div>
+
         <div className='input-wrapper'>
           <p className='label'>
-            Do you need a transfer from the airport?
-            <span className='error'>{this.state.radioError}</span>
+            Do you need a transfer from the airport?{' '}
+            <span className='error'>{errors.transfer?.message?.toString()}</span>
           </p>
           <label>
-            <input name='transfer' type='radio' ref={this.transferRefyes} defaultValue='yes'></input>
+            <input
+              {...register('transfer', {
+                required: 'Please, select something',
+              })}
+              name='transfer'
+              type='radio'
+              value='yes'
+            ></input>
             Yes
           </label>
           <label>
-            <input name='transfer' type='radio' ref={this.transferRefno} defaultValue='no'></input>
+            <input
+              {...register('transfer', {
+                required: 'Please, select something',
+              })}
+              name='transfer'
+              type='radio'
+              value='no'
+            ></input>
             No
           </label>
         </div>
-        <div className='input-wrapper'>
+
+        {/* <div className='input-wrapper'>
           <p className='label'>
             Upload a photo: <span className='error'>{this.state.fileError}</span>
           </p>
           <input type='file' ref={this.fileRef} accept='image/*,.png,.jpg'></input>
-        </div> */}
+        </div>  */}
+
         <button className='button'>Submit</button>
       </form>
       {/* <div className='cards-collection'>

@@ -33,6 +33,10 @@ export interface IFormsState {
   cards: IFormCard[];
   isFormFilled: boolean;
 }
+export interface IOption {
+  value: string;
+  label: string;
+}
 
 export const emptyState = {
   nameError: '',

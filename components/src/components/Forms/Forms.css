@@ -13,6 +13,7 @@ h3, h5, p {
   flex-direction: column;
   gap: 5px;
   width: 470px;
+  margin: 5px 0;
 }
 
 .label {
@@ -20,10 +21,17 @@ h3, h5, p {
 }
 
 .input-name,
-.input-date,
+.input-date {
+  height: 38px;
+  padding: 0 5px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 .input-select {
   height: 25px;
-  padding: 0 5px;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .uploaded-pic {
