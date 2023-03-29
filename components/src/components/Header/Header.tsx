@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-class Header extends Component {
-  links = [
+const Header = () => {
+  const links = [
     {
       link: '/',
       title: 'Home Page',
@@ -17,23 +17,21 @@ class Header extends Component {
     },
   ];
 
-  render() {
-    return (
-      <header className='header'>
-        <nav>
-          <ul className='header-ul'>
-            {this.links.map((link) => (
-              <li key={link.title}>
-                <NavLink className='navlink' to={link.link}>
-                  {link.title}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-    );
-  }
-}
+  return (
+    <header className='header'>
+      <nav>
+        <ul className='header-ul'>
+          {links.map((link) => (
+            <li key={link.title}>
+              <NavLink className='navlink' to={link.link}>
+                {link.title}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
 export default Header;

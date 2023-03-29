@@ -1,10 +1,14 @@
 /* eslint-disable array-callback-return */
 import './Forms.css';
-import React, { Component } from 'react';
+import React, { Component, FC } from 'react';
 import { emptyState, IFormCard } from '../../utils/types';
 import CardInForms from '../CardInForms/CardInForms';
 
-class Forms extends Component {
+interface FormsProps {
+  setCards: () => void;
+}
+
+const Forms:FC<FormsProps> = () => {
   state = emptyState;
 
   formRef = React.createRef<HTMLFormElement>();
