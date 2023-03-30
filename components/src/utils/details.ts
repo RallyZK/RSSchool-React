@@ -118,3 +118,50 @@ export const emptyState = {
 //   }
 //   event.preventDefault();
 // };
+
+// const getFileValue = (value: { files: (Blob | MediaSource)[] }) => (value ? URL.createObjectURL(value.files[0]) : // '');
+// const getFileValue = (value: { files: (Blob | MediaSource)[] }) => (value ? JSON.stringify(value) : '');
+{
+  /* <Controller
+          control={control}
+          name='file'
+          rules={{
+            required: 'Please, upload a file',
+          }}
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
+            <div className='input-wrapper'>
+              <p className='label'>
+                Upload a photo: <span className='error'>{error && error.message}</span>
+              </p>
+              <input
+                type='file'
+                accept='image/*,.png,.jpg'
+                value={getFileValue(value)}
+                onChange={(newValue) => onChange(console.log(newValue))}
+              ></input>
+            </div>
+          )}
+        /> */
+}
+
+// {
+//                     if (e.target?.files?.[0]) {
+//                       if (value?.length) {
+//                         return onChange([...value, ...Array.from(e.target.files)]);
+//                       }
+//                       return onChange([e.target.files[0]]);
+//                     }
+//                   }
+
+// {/* <div className='input-wrapper'>
+//           <p className='label'>
+//             Upload a photo: <span className='error'>{errors.file?.message?.toString()}</span>
+//           </p>
+//           <input
+//             type='file'
+//             accept='image/*,.png,.jpg'
+//             {...register('file', {
+//               required: true,
+//             })}
+//           ></input>
+//         </div> */}

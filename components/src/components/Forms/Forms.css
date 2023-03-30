@@ -20,6 +20,11 @@ h3, h5, p {
   font-weight: 600;
 }
 
+.mini-label {
+display: flex;
+gap: 5px;
+}
+
 .input-name,
 .input-date {
   height: 38px;

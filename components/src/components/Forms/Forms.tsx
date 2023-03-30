@@ -2,22 +2,14 @@
 import './Forms.css';
 import ReactSelect from 'react-select';
 import { IOption } from '../../utils/types';
-import CardInForms from '../CardInForms/CardInForms';
-import { checkboxOptions, radioOptions, selectOptions } from '../../utils/details';
 import React, { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-// import * as Yup from 'yup';
-// import { yupResolver } from '@hookform/resolvers/yup';
+import { checkboxOptions, radioOptions, selectOptions } from '../../utils/details';
 interface FormsProps {
   setCards: Dispatch<SetStateAction<never[]>>;
 }
 
 const Forms: FC<FormsProps> = ({ setCards }) => {
-  // const validation = Yup.object().shape({
-  //   name: Yup.string().min(2, { message: 'Required' }),
-  //   chooseCb: Yup.bool().oneOf([true], 'Checkbox selection is required'),
-  // });
-
   const { register, formState, handleSubmit, watch, control, reset } = useForm();
   const { errors } = formState;
 
@@ -27,17 +19,15 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
+  const getValue = (value: string) => (value ? selectOptions.find((option) => option.value === value) : '');
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     if (watchCheckboxes.length !== 0) {
       console.log(data);
     } else {
-      // errors.realEstate.message = 'checkboxes not selected';
       console.log('checkboxes not selected');
     }
-    console.log('watchShowAge1:::', watchCheckboxes);
   };
-
-  const getValue = (value: string) => (value ? selectOptions.find((option) => option.value === value) : '');
 
   return (
     <>
@@ -102,33 +92,20 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
           )}
         />
         <div className='input-wrapper'>
-          <p className='label'>
-            What type of real estate are you interested in?{' '}
-            <span className='error'>{watchCheckboxes.length > 0 ? '' : 'select something'}</span>
-          </p>
+          <p className='label'>What type of real estate are you interested in?</p>
+          <p className='label error'>{watchCheckboxes.length > 0 ? '' : 'Please, select something'}</p>
           {checkboxOptions.map((el: IOption) => (
-            <label key={el.value}>
+            <label className='mini-label' key={el.value}>
               <input {...register('realEstate')} name='realEstate' type='checkbox' value={el.value}></input>
               {el.value}
             </label>
           ))}
-          {/* <label>
-            <input {...register('realEstate')} name='realEstate' type='checkbox' value='villa'></input>
-            Villa
-          </label>
-          <label>
-            <input {...register('realEstate')} name='realEstate' type='checkbox' value='apartment'></input>
-            Apartment
-          </label> */}
         </div>
-
         <div className='input-wrapper'>
-          <p className='label'>
-            Do you need a transfer from the airport?{' '}
-            <span className='error'>{errors.transfer?.message?.toString()}</span>
-          </p>
+          <p className='label'>Do you need a transfer from the airport?</p>
+          <p className='label error'>{errors.transfer?.message?.toString()}</p>
           {radioOptions.map((el: IOption) => (
-            <label key={el.value}>
+            <label className='mini-label' key={el.value}>
               <input
                 {...register('transfer', {
                   required: 'Please, select something',
@@ -141,12 +118,23 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
             </label>
           ))}
         </div>
-        {/* <div className='input-wrapper'>
-          <p className='label'>
-            Upload a photo: <span className='error'>{this.state.fileError}</span>
-          </p>
-          <input type='file' ref={this.fileRef} accept='image/*,.png,.jpg'></input>
-        </div>  */}
+        <Controller
+          name='file'
+          control={control}
+          rules={{
+            required: { value: true, message: 'Please, upload a file' },
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => {
+            return (
+              <div className='input-wrapper'>
+                <p className='label'>
+                  Upload a photo: <span className='error'>{error && error.message}</span>
+                </p>
+                <input type='file' accept='image/*,.png,.jpg' onChange={(e) => onChange(e.target?.files?.[0])} />
+              </div>
+            );
+          }}
+        />
         <button className='button'>Submit</button>
       </form>
       {/* <div className='cards-collection'>
