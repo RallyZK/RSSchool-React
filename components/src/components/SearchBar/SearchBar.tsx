@@ -6,8 +6,9 @@ const SearchBar = () => {
   const [searchPhrase, setSearchPhrase] = useState(searchPhraseFromLS ? searchPhraseFromLS : '');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchPhrase(event.target.value);
-    localStorage.setItem('searchPhraseToLS', searchPhrase);
+    const phrase = event.target.value;
+    setSearchPhrase(phrase);
+    localStorage.setItem('searchPhraseToLS', phrase);
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {

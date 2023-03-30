@@ -1,133 +1,50 @@
 /* eslint-disable array-callback-return */
 import './Forms.css';
-import React, { Dispatch, FC, SetStateAction } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import CardInForms from '../CardInForms/CardInForms';
-import { emptyState, IFormCard, IOption } from '../../utils/types';
 import ReactSelect from 'react-select';
+import { IOption } from '../../utils/types';
+import CardInForms from '../CardInForms/CardInForms';
+import { checkboxOptions, radioOptions, selectOptions } from '../../utils/details';
+import React, { Dispatch, FC, SetStateAction, useEffect } from 'react';
+import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+// import * as Yup from 'yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 interface FormsProps {
   setCards: Dispatch<SetStateAction<never[]>>;
 }
 
 const Forms: FC<FormsProps> = ({ setCards }) => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    control,
-    reset,
-  } = useForm();
+  // const validation = Yup.object().shape({
+  //   name: Yup.string().min(2, { message: 'Required' }),
+  //   chooseCb: Yup.bool().oneOf([true], 'Checkbox selection is required'),
+  // });
 
-  const options: IOption[] = [
-    {
-      value: 'To buy a real state',
-      label: 'To buy a real state',
-    },
-    {
-      value: 'To rent a real state',
-      label: 'To rent a real state',
-    },
-  ];
-  const checkboxOptions = [
-    {
-      value: 'yes',
-    },
-    {
-      value: 'no',
-    },
-  ];
+  const { register, formState, handleSubmit, watch, control, reset } = useForm();
+  const { errors } = formState;
 
-  // checkCheckboxes = (): void => {
-  //   let checkedCount = 0;
-  //   if (this.chexboxRefVilla.current) {
-  //     checkedCount = this.chexboxRefVilla.current.checked ? checkedCount + 1 : checkedCount + 0;
-  //   }
-  //   if (this.chexboxRefApartment.current) {
-  //     checkedCount = this.chexboxRefApartment.current.checked ? checkedCount + 1 : checkedCount + 0;
-  //   }
-  //   this.setState({ checkboxError: checkedCount === 0 ? 'Select something' : '' });
-  // };
+  const watchCheckboxes = watch('realEstate', ['no']);
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => console.log(value, name, type));
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
-  // checkFile = () => {
-  //   if (this.fileRef && this.fileRef.current && this.fileRef.current.files?.length) {
-  //     this.setState({ fileError: '' });
-  //   } else {
-  //     this.setState({ fileError: 'Please, upload a photo' });
-  //   }
-  // };
-
-  // clearForm = () => {
-  //   this.formRef.current && this.formRef.current.reset();
-  // };
-
-  // createCardInfo = () => {
-  //   const card2: IFormCard = {
-  //     name: this.nameRef && this.nameRef.current ? this.nameRef.current.value : '',
-  //     date: this.dateRef && this.dateRef.current ? this.dateRef.current.value : '',
-  //     purpose: this.purposeRef && this.purposeRef.current ? this.purposeRef.current.value : '',
-  //     realEstate: [
-  //       this.chexboxRefVilla && this.chexboxRefVilla.current?.checked && this.chexboxRefVilla.current?.name
-  //         ? this.chexboxRefVilla.current.name
-  //         : '',
-  //       this.chexboxRefApartment && this.chexboxRefApartment.current?.checked && this.chexboxRefApartment.current?.name
-  //         ? this.chexboxRefApartment.current.name
-  //         : '',
-  //     ],
-  //     transfer: this.transferRefyes && this.transferRefyes.current?.checked ? 'yes' : 'no',
-  //     file:
-  //       this.fileRef && this.fileRef.current && this.fileRef.current.files
-  //         ? URL.createObjectURL(this.fileRef.current.files[0])
-  //         : '',
-  //   };
-  //   const updatedCards = this.state.cards.map((el) => el);
-  //   updatedCards.push(card2);
-  //   this.setState({ cards: updatedCards });
-  // };
-
-  // openModal = () => {
-  //   this.setState({ isFormFilled: true });
-  //   const timer = setTimeout(() => {
-  //     this.setState({ isFormFilled: false });
-  //     clearTimeout(timer);
-  //   }, 5000);
-  // };
-
-  // handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   await this.checkName();
-  //   await this.checkSelect();
-  //   await this.checkCheckboxes();
-  //   await this.checkRadioBtns();
-  //   await this.checkFile();
-  //   if (
-  //     !this.state.nameError &&
-  //     !this.state.selectError &&
-  //     !this.state.checkboxError &&
-  //     !this.state.radioError &&
-  //     !this.state.fileError
-  //   ) {
-  //     this.createCardInfo();
-  //     this.openModal();
-  //     this.clearForm();
-  //   }
-  //   event.preventDefault();
-  // };
-
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (watchCheckboxes.length !== 0) {
+      console.log(data);
+    } else {
+      // errors.realEstate.message = 'checkboxes not selected';
+      console.log('checkboxes not selected');
+    }
+    console.log('watchShowAge1:::', watchCheckboxes);
   };
 
-  const onChangeName = () => {
-    console.log(typeof errors.name?.message);
-  };
-
-  const getValue = (value: string) => (value ? options.find((option) => option.value === value) : '');
+  const getValue = (value: string) => (value ? selectOptions.find((option) => option.value === value) : '');
 
   return (
     <>
       <form className='forms-wrapper' onSubmit={handleSubmit(onSubmit)}>
         <div className='input-wrapper'>
           <label htmlFor='name' className='label'>
-            Name: <span className='error'>{errors?.name?.message?.toString()}</span>
+            Name: <span className='error'>{errors.name?.message?.toString()}</span>
           </label>
           <input
             id='name'
@@ -144,7 +61,6 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
             })}
             className='input-name'
             placeholder='Enter your name here'
-            onChange={onChangeName}
           ></input>
         </div>
         <div className='input-wrapper'>
@@ -177,7 +93,7 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
               </label>
               <ReactSelect
                 className='input-select'
-                options={options}
+                options={selectOptions}
                 placeholder={'Select a purpose'}
                 value={getValue(value)}
                 onChange={(newValue) => onChange((newValue as IOption).value)}
@@ -188,28 +104,22 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
         <div className='input-wrapper'>
           <p className='label'>
             What type of real estate are you interested in?{' '}
-            <span className='error'>{errors.rstypes?.message?.toString()}</span>
+            <span className='error'>{watchCheckboxes.length > 0 ? '' : 'select something'}</span>
           </p>
-          <label>
-            <input
-              {...register('rstypes', { deps: ['Villa', 'Apartment'] })}
-              name='Villa'
-              type='checkbox'
-              value='Villa'
-              // onChange={changeHandler}
-            ></input>
+          {checkboxOptions.map((el: IOption) => (
+            <label key={el.value}>
+              <input {...register('realEstate')} name='realEstate' type='checkbox' value={el.value}></input>
+              {el.value}
+            </label>
+          ))}
+          {/* <label>
+            <input {...register('realEstate')} name='realEstate' type='checkbox' value='villa'></input>
             Villa
           </label>
           <label>
-            <input
-              {...register('rstypes', { deps: ['Villa', 'Apartment'] })}
-              name='Apartment'
-              type='checkbox'
-              value='Apartment'
-              // onChange={changeHandler}
-            ></input>
+            <input {...register('realEstate')} name='realEstate' type='checkbox' value='apartment'></input>
             Apartment
-          </label>
+          </label> */}
         </div>
 
         <div className='input-wrapper'>
@@ -217,37 +127,26 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
             Do you need a transfer from the airport?{' '}
             <span className='error'>{errors.transfer?.message?.toString()}</span>
           </p>
-          <label>
-            <input
-              {...register('transfer', {
-                required: 'Please, select something',
-              })}
-              name='transfer'
-              type='radio'
-              value='yes'
-            ></input>
-            Yes
-          </label>
-          <label>
-            <input
-              {...register('transfer', {
-                required: 'Please, select something',
-              })}
-              name='transfer'
-              type='radio'
-              value='no'
-            ></input>
-            No
-          </label>
+          {radioOptions.map((el: IOption) => (
+            <label key={el.value}>
+              <input
+                {...register('transfer', {
+                  required: 'Please, select something',
+                })}
+                name='transfer'
+                type='radio'
+                value={el.value}
+              ></input>
+              {el.value}
+            </label>
+          ))}
         </div>
-
         {/* <div className='input-wrapper'>
           <p className='label'>
             Upload a photo: <span className='error'>{this.state.fileError}</span>
           </p>
           <input type='file' ref={this.fileRef} accept='image/*,.png,.jpg'></input>
         </div>  */}
-
         <button className='button'>Submit</button>
       </form>
       {/* <div className='cards-collection'>

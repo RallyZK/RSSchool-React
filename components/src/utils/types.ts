@@ -33,26 +33,16 @@ export interface IFormsState {
   cards: IFormCard[];
   isFormFilled: boolean;
 }
+
+export interface IData {
+  name: string;
+  date: string;
+  purpose: string;
+  realEstate: string;
+  transfer: string;
+  file: string;
+}
 export interface IOption {
   value: string;
-  label: string;
+  label?: string;
 }
-
-export const emptyState = {
-  nameError: '',
-  selectError: '',
-  checkboxError: '',
-  radioError: '',
-  fileError: '',
-  cards: [
-    {
-      name: '',
-      date: '',
-      purpose: '',
-      realEstate: [''],
-      transfer: '',
-      file: '',
-    },
-  ],
-  isFormFilled: false,
-};
