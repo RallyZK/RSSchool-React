@@ -1,9 +1,9 @@
 import './CardInForms.css';
 import React, { FC } from 'react';
-import { IFormCard } from '../../utils/types';
+import { IData } from '../../utils/types';
 
 type Props = {
-  card: IFormCard;
+  card: IData;
 };
 
 const FormCard: FC<Props> = ({ card }) => {

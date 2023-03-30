@@ -1,7 +1,8 @@
 .form-card {
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 400px;
+  width: 250px;
   padding: 10px;
   filter: drop-shadow(0 0 3px rgba(174, 183, 235, 0.5));
 }
@@ -22,6 +23,7 @@
 
 .form-card-content > h4 {
   text-align: center;
+  overflow-x: hidden;
 }
 
 .form-card-desc {

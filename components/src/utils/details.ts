@@ -36,6 +36,15 @@ export const radioOptions: IOption[] = [
   },
 ];
 
+export const emptyCard = {
+  name: '',
+  date: '',
+  purpose: '',
+  realEstate: [''],
+  transfer: '',
+  file: '',
+};
+
 export const emptyState = {
   nameError: '',
   selectError: '',

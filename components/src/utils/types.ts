@@ -9,36 +9,20 @@ export interface IHouse {
   url: string;
   picUrl: string;
 }
-
-export interface IFormCard {
-  name: string;
-  date: string;
-  purpose: string;
-  realEstate: string[];
-  transfer: string;
-  file: string;
-}
-
-export interface ICheckBox {
-  name: string;
-  checked: boolean;
-}
-
 export interface IFormsState {
   nameError: string;
   selectError: string;
   checkboxError: string;
   radioError: string;
   fileError: string;
-  cards: IFormCard[];
+  cards: IData[];
   isFormFilled: boolean;
 }
-
 export interface IData {
   name: string;
   date: string;
   purpose: string;
-  realEstate: string;
+  realEstate: string[];
   transfer: string;
   file: string;
 }

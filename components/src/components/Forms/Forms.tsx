@@ -1,32 +1,33 @@
 /* eslint-disable array-callback-return */
 import './Forms.css';
+import React, { FC, useEffect, useState } from 'react';
 import ReactSelect from 'react-select';
-import { IOption } from '../../utils/types';
-import React, { Dispatch, FC, SetStateAction, useEffect } from 'react';
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { IData, IOption } from '../../utils/types';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { checkboxOptions, radioOptions, selectOptions } from '../../utils/details';
 interface FormsProps {
-  setCards: Dispatch<SetStateAction<never[]>>;
+  createNewCard: (newCard: IData) => void;
+  openModal: (isFormFilled: boolean) => void;
 }
 
-const Forms: FC<FormsProps> = ({ setCards }) => {
-  const { register, formState, handleSubmit, watch, control, reset } = useForm();
+const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
+  const { register, formState, handleSubmit, watch, control, reset } = useForm<IData>();
   const { errors } = formState;
 
   const watchCheckboxes = watch('realEstate', ['no']);
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => console.log(value, name, type));
-    return () => subscription.unsubscribe();
-  }, [watch]);
+  // useEffect(() => {
+  //   const subscription = watch((value, { name, type }) => console.log(value, name, type));
+  //   return () => subscription.unsubscribe();
+  // }, [watchCheckboxes]);
 
   const getValue = (value: string) => (value ? selectOptions.find((option) => option.value === value) : '');
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (watchCheckboxes.length !== 0) {
-      console.log(data);
-    } else {
-      console.log('checkboxes not selected');
-    }
+  const onSubmit: SubmitHandler<IData> = (data: IData) => {
+    const file = URL.createObjectURL(new Blob([data.file]));
+    data.file = file;
+    createNewCard(data);
+    openModal(true);
+    reset();
   };
 
   return (
@@ -130,24 +131,13 @@ const Forms: FC<FormsProps> = ({ setCards }) => {
                 <p className='label'>
                   Upload a photo: <span className='error'>{error && error.message}</span>
                 </p>
-                <input type='file' accept='image/*,.png,.jpg' onChange={(e) => onChange(e.target?.files?.[0])} />
+                <input type='file' accept='image/*,.png,.jpg' onChange={(e) => onChange(e.target.files?.[0])} />
               </div>
             );
           }}
         />
         <button className='button'>Submit</button>
       </form>
-      {/* <div className='cards-collection'>
-        {this.state.cards.map((card, index) => {
-          if (index > 0) {
-            return <CardInForms card={card} key={card.name} />;
-          }
-        })}
-      </div>
-      <div className={`modal-wrapper ${this.state.isFormFilled ? '' : 'display-none'}`}>
-        <div className='modal-img'></div>
-        <h2 className='modal-title'>You information is successfully saved!</h2>
-      </div> */}
     </>
   );
 };
