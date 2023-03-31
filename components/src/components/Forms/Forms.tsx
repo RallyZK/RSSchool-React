@@ -7,7 +7,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { checkboxOptions, radioOptions, selectOptions } from '../../utils/details';
 interface FormsProps {
   createNewCard: (newCard: IData) => void;
-  openModal: (isFormFilled: boolean) => void;
+  openModal: () => void;
 }
 
 const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
@@ -26,7 +26,7 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
     const file = URL.createObjectURL(new Blob([data.file]));
     data.file = file;
     createNewCard(data);
-    openModal(true);
+    openModal();
     reset();
   };
 

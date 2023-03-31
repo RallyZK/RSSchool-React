@@ -8,15 +8,19 @@ import ModalWindow from '../../components/ModalWindow/ModalWindow';
 
 const FormsPage = () => {
   const [cards, setCards] = useState([emptyCard]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isImgModalOpen, setIsImgModalOpen] = useState(false);
 
   const handleChange = (newCard: IData) => {
     setCards([...cards, newCard]);
     console.log([...cards, newCard]);
   };
 
-  const openModal = (isFormFilled: boolean) => {
-    setIsModalOpen((prev) => !prev);
+  const openImgModal = () => {
+    setIsImgModalOpen(true);
+  };
+
+  const closeImgModal = () => {
+    setIsImgModalOpen(false);
   };
 
   return (
@@ -24,9 +28,9 @@ const FormsPage = () => {
       <h1>Forms</h1>
       <h3 className='page-title'>Forms</h3>
       <h3>Plan your visit to Dubai:</h3>
-      <Forms createNewCard={handleChange} openModal={openModal} />
+      <Forms createNewCard={handleChange} openModal={openImgModal} />
       <CardsList cards={cards} />
-      <ModalWindow openModal={isModalOpen} />
+      <ModalWindow isModalOpen={isImgModalOpen} closeModal={closeImgModal} />
     </div>
   );
 };

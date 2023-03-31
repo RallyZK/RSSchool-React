@@ -2,25 +2,25 @@ import React, { FC, useState } from 'react';
 import './ModalWindow.css';
 
 interface ModalWindowProps {
-  openModal: (isModalOpen: boolean) => void;
+  isModalOpen: boolean;
+  closeModal: () => void;
 }
 
-const ModalWindow: FC<ModalWindowProps> = ({ openModal }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ModalWindow: FC<ModalWindowProps> = ({ isModalOpen, closeModal }) => {
+  // const [isOpen, setIsOpen] = useState(false);
 
-  const closeModal = () => {
-    openModal(true);
-    setIsOpen(true);
+  const closeThisModal = () => {
+    // setIsOpen(true);
     const timer = setTimeout(() => {
-      openModal(false);
-      setIsOpen(false);
+      closeModal();
+      // setIsOpen(false);
       clearTimeout(timer);
     }, 5000);
   };
-  closeModal();
+  closeThisModal();
 
   return (
-    <div className={`modal-wrapper ${isOpen ? '' : 'display-none'}`}>
+    <div className={`modal-wrapper ${isModalOpen ? '' : 'display-none'}`}>
       <div className='modal-img'></div>
       <h2 className='modal-title'>You information is successfully saved!</h2>
     </div>
