@@ -8,7 +8,7 @@ describe('CardInForms test', () => {
       name: 'test name',
       date: '01-01-2023',
       purpose: 'test purpose',
-      agree: 'yes',
+      agree: 'no',
       transfer: 'yes',
       file: 'url',
     };
@@ -17,7 +17,6 @@ describe('CardInForms test', () => {
     expect(screen.getByRole('img', { name: /test name/i })).toBeInTheDocument();
     expect(screen.getByText(/test name/i)).toBeInTheDocument();
     expect(screen.getByText(/test purpose/i)).toBeInTheDocument();
-    expect(screen.getByText(/yes/i)).toBeInTheDocument();
     expect(screen.getByText(/yes/i)).toBeInTheDocument();
   });
 });

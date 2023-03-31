@@ -10,11 +10,7 @@ interface CardsListProps {
 const CardsList: FC<CardsListProps> = ({ cards }) => {
   return (
     <div className='cards-collection'>
-      {cards.map((card: IData, index: number) => {
-        if (index > 0) {
-          return <CardInForms card={card} key={card.name} />;
-        }
-      })}
+      {cards.map((card: IData, index: number) => (index > 0 ? <CardInForms card={card} key={card.name} /> : ''))}
     </div>
   );
 };
