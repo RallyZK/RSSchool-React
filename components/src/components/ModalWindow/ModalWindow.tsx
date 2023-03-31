@@ -1,21 +1,16 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import './ModalWindow.css';
-
 interface ModalWindowProps {
   isModalOpen: boolean;
   closeModal: () => void;
 }
 
 const ModalWindow: FC<ModalWindowProps> = ({ isModalOpen, closeModal }) => {
-  // const [isOpen, setIsOpen] = useState(false);
-
   const closeThisModal = () => {
-    // setIsOpen(true);
     const timer = setTimeout(() => {
       closeModal();
-      // setIsOpen(false);
       clearTimeout(timer);
-    }, 5000);
+    }, 4000);
   };
   closeThisModal();
 

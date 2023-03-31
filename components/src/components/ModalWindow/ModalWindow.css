@@ -13,6 +13,8 @@
   top: 187px;
   transform: translate(-50%, -100px);
   z-index: 100;
+  -moz-box-shadow: 4px 4px 45px 52px rgba(56, 189, 248, 0.2);
+  box-shadow: 4px 4px 45px 52px rgba(56, 189, 248, 0.2);
 }
 
 .modal-img {

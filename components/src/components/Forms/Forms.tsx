@@ -1,24 +1,17 @@
-/* eslint-disable array-callback-return */
 import './Forms.css';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import ReactSelect from 'react-select';
 import { IData, IOption } from '../../utils/types';
+import { radioOptions, selectOptions } from '../../utils/details';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { checkboxOptions, radioOptions, selectOptions } from '../../utils/details';
 interface FormsProps {
   createNewCard: (newCard: IData) => void;
   openModal: () => void;
 }
 
 const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
-  const { register, formState, handleSubmit, watch, control, reset } = useForm<IData>();
+  const { register, formState, handleSubmit, control, reset } = useForm<IData>();
   const { errors } = formState;
-
-  const watchCheckboxes = watch('realEstate', ['no']);
-  // useEffect(() => {
-  //   const subscription = watch((value, { name, type }) => console.log(value, name, type));
-  //   return () => subscription.unsubscribe();
-  // }, [watchCheckboxes]);
 
   const getValue = (value: string) => (value ? selectOptions.find((option) => option.value === value) : '');
 
@@ -93,16 +86,6 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
           )}
         />
         <div className='input-wrapper'>
-          <p className='label'>What type of real estate are you interested in?</p>
-          <p className='label error'>{watchCheckboxes.length > 0 ? '' : 'Please, select something'}</p>
-          {checkboxOptions.map((el: IOption) => (
-            <label className='mini-label' key={el.value}>
-              <input {...register('realEstate')} name='realEstate' type='checkbox' value={el.value}></input>
-              {el.value}
-            </label>
-          ))}
-        </div>
-        <div className='input-wrapper'>
           <p className='label'>Do you need a transfer from the airport?</p>
           <p className='label error'>{errors.transfer?.message?.toString()}</p>
           {radioOptions.map((el: IOption) => (
@@ -136,6 +119,19 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
             );
           }}
         />
+        <div className='input-wrapper'>
+          <p className='label'>Consent on personal data processing</p>
+          <p className='label error'>{errors?.agree?.message?.toString()}</p>
+          <label className='mini-label'>
+            <input
+              {...register('agree', {
+                required: 'Please, confirm consent',
+              })}
+              type='checkbox'
+            ></input>
+            I agree
+          </label>
+        </div>
         <button className='button'>Submit</button>
       </form>
     </>

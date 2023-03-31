@@ -1,7 +1,7 @@
 .form-card {
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: 350px;
   width: 250px;
   padding: 10px;
   filter: drop-shadow(0 0 3px rgba(174, 183, 235, 0.5));

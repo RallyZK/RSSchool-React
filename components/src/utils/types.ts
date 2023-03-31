@@ -22,7 +22,7 @@ export interface IData {
   name: string;
   date: string;
   purpose: string;
-  realEstate: string[];
+  agree: string;
   transfer: string;
   file: string;
 }

@@ -12,7 +12,6 @@ const FormsPage = () => {
 
   const handleChange = (newCard: IData) => {
     setCards([...cards, newCard]);
-    console.log([...cards, newCard]);
   };
 
   const openImgModal = () => {
