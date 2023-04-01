@@ -42,6 +42,7 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
                 value: /^[a-zA-Z]+$/,
                 message: 'Please, write your name only in latin characters',
               },
+              validate: (text) => text[0] === text[0].toUpperCase() || 'Name should starts with capital letter',
             })}
             className='input-name'
             placeholder='Enter your name here'
