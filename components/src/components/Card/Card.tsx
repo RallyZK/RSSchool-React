@@ -1,26 +1,26 @@
 import './Card.css';
 import React, { FC } from 'react';
-import { IHouse } from '../../utils/types';
+import { IPerson } from '../../utils/types';
+import { getImageOfPerson } from '../../utils/api';
 
 type Props = {
-  card: IHouse;
+  card: IPerson;
 };
 
 const Card: FC<Props> = ({ card }) => {
   return (
     <div className='card'>
-      <img className='card-img' src={card.picUrl} alt={card.title}></img>
+      <img
+        className='card-img'
+        src={'https://starwars-visualguide.com/assets/img/characters/1.jpg'}
+        alt={card.name}
+      ></img>
       <div className='card-content'>
-        <h4>{card.title}</h4>
-        <p className='card-location'>{card.location}</p>
-        <p className='card-price'>{card.price} AED</p>
-        <div className='card-desc'>
-          <p>{card.square} SqFt</p>
-          <p>{card.bedroomsCount} Beds</p>
-          <p>{card.bathroomsCount} Baths</p>
-        </div>
+        <h4>{card.name} Luke Skywalker</h4>
+        <p className='card-location'>Birth year: {card.birth_year}</p>
+        <p className='card-price'>Gender: {card.gender}</p>
         <a className='card-button' href={card.url} rel='noreferrer' target='_blank'>
-          Details
+          More details
         </a>
       </div>
     </div>
