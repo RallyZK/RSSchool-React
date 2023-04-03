@@ -3,23 +3,23 @@ import React from 'react';
 const AboutUs = () => {
   return (
     <div className='page'>
-      <h1>About Us</h1>
-      <h3 className='page-title'>About Us</h3>
+      <h1>About</h1>
+      <h3 className='page-title'>About</h3>
       <p>
-        Our mission: To motivate and inspire people to get living the life they deserve. When you look for a property,
-        it’s not just a better home you seek, it’s a better future. Unlock Your Potential. Dubizzle is the leading
-        classifieds platform for users in the United Arab Emirates. Since its launch in 2005, dubizzle has become the
-        number one platform for users to buy, sell, or find anything in their community. A community where underused
-        goods are redistributed to fill a new need, and become wanted again, where non-product assets such as space,
-        skills, and money are exchanged and traded in new ways that don’t always require centralized institutions or
-        ‘middlemen’. dubizzle is a part of the Emerging Markets Property Group (EMPG) which also operates the largest
-        property classified sites in Pakistan, Bangladesh and Morocco. In April 2020, the EMPG merged with the
-        Netherlands-based OLX group in certain key markets, and was valued at $1 Billion, giving it the coveted unicorn
-        status. The group now also owns and operates Bayut in the UAE, OLX Pakistan, OLX Egypt and OLX Lebanon, in
-        addition to several other platforms in the broader Middle East region, including Saudi Arabia, Bahrain, Oman,
-        Kuwait and Qatar. Now situated in the heart of Dubai Design District, Dubai’s skyline may have changed, but
-        dubizzle has not, and there is so much more to come. If you need anything to buy or sell, all you need is
-        dubizzle! Yalla, let’s go.
+        Star Wars is a multi-genre mythology and multimedia franchise created by George Lucas in 1976. Comprising
+        movies, novels, comics, video games, toys, and numerous television series, the Star Wars franchise employs
+        archetypal motifs common to religions, classical mythology, and political climax, as well as musical motifs of
+        those same aspects. As one of the foremost examples of the space opera subgenre of science fiction, Star Wars
+        has become part of mainstream popular culture, as well as being one of the highest-grossing series of all
+        time.[2] In 2012, The Walt Disney Company bought the rights to the franchise from George Lucas for 4.05 billion
+        dollars. Since then, Disney has split off Star Wars into two main categories, those being Star Wars Legends and
+        Star Wars Canon, with Canon being the official story of the franchise. The catalyst of the multimedia franchise
+        was the release of its mainline story, officially known as the Skywalker Saga; a collection of 9 films released
+        from the years 1977 to 2019, with the first and last release of Star Wars: Episode IV A New Hope and Star Wars:
+        Episode IX The Rise of Skywalker, respectively. Despite the saga`s ending, the franchise still continues strong,
+        mainly due to the success of Disney+ original television series, both live action, such as The Mandalorian; and
+        animated, such as Star Wars: The Bad Batch; as well as publishing projects, such as Star Wars: The High
+        Republic.
       </p>
     </div>
   );

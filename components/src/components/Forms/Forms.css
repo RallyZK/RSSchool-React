@@ -45,24 +45,37 @@ gap: 5px;
 }
 
 .error {
-  color: #ff006b;
+  color: #f1c40f;
 }
 
-.button {
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all ease-in;
-  transition-duration: 200ms;
-  border: 2px solid #38bdf8;
-  background-color: #38bdf8;
-  width: 120px;
-  height: 35px;
-  margin: 20px auto;
-  font-size: 16px;
-  font-weight: 600;
+.db-button {
+  text-decoration: none;
+    display: inline-block;
+    margin: 20px auto;
+    padding: 10px 30px;
+    position: relative;
+    border: 2px solid #f1c40f;
+    color: #f1c40f;
+    transition: 0.4s;
+    background: transparent;
 }
 
-.button:hover {
-  background-color: transparent;
-  border: 2px solid #38bdf8;
+.db-button:after {
+  content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: .4s;
+}
+
+.db-button:hover:after {
+  border-color: #f1c40f;
+  width: calc(100% - 10px);
+  height: calc(100% + 10px);
 }

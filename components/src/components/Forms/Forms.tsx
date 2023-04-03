@@ -133,7 +133,7 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
             I agree
           </label>
         </div>
-        <button className='button'>Submit</button>
+        <button className='db-button'>Submit</button>
       </form>
     </>
   );

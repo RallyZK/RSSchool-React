@@ -26,7 +26,6 @@ const FormsPage = () => {
     <div className='page'>
       <h1>Forms</h1>
       <h3 className='page-title'>Forms</h3>
-      <h3>Plan your visit to Dubai:</h3>
       <Forms createNewCard={handleChange} openModal={openImgModal} />
       <CardsList cards={cards} />
       <ModalWindow isModalOpen={isImgModalOpen} closeModal={closeImgModal} />

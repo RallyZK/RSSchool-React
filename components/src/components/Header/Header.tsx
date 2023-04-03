@@ -30,6 +30,7 @@ const Header = () => {
           ))}
         </ul>
       </nav>
+      <div className='logo'></div>
     </header>
   );
 };

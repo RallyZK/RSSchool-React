@@ -26,7 +26,7 @@ const SearchBar = () => {
   return (
     <form className='search-bar' onSubmit={(event) => handleFormSubmit(event)}>
       <input
-        placeholder='Enter something'
+        placeholder='Enter character name. Example: Luke Skywalker'
         className='search-input'
         value={searchPhrase}
         onChange={(event) => handleChange(event)}

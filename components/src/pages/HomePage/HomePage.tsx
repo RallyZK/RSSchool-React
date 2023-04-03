@@ -8,12 +8,12 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 const HomePage = () => {
   return (
     <div className='page'>
-      <h1>Live the life you deserve</h1>
       <h3 className='page-title'>Home Page</h3>
+      <h1>Star Wars universe characters</h1>
       <SearchBar />
-      <div className='cards-wrapper'>
+      {/* <div className='cards-wrapper'>
         {catalog && catalog.map((card: IHouse) => <Card card={card} key={card.id} />)}
-      </div>
+      </div> */}
     </div>
   );
 };
