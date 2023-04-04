@@ -8,11 +8,11 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import CardModalWindow from '../../components/CardModalWindow/CardModalWindow';
 
 const HomePage = () => {
-  const [characters, setCharacters] = useState([emptyPersonCard]);
+  const [message, setMessage] = useState('');
   const [isFullData, setIsFullData] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [characters, setCharacters] = useState([emptyPersonCard]);
   const [currentCard, setCurrentCard] = useState(emptyPersonCard);
-  const [message, setMessage] = useState('');
 
   // const getCharactersForRender = async () => {
   //   setMessage('Progressing...');
@@ -33,7 +33,7 @@ const HomePage = () => {
       setMessage('');
       setCharacters(data);
     } else {
-      setMessage('No results :( Please, try something else');
+      setMessage('No results :( Please, try to search something else');
       setCharacters([]);
     }
   };
@@ -63,7 +63,7 @@ const HomePage = () => {
       {isFullData ? (
         <div className='cards-wrapper'>
           {characters.map((card: IPerson) => (
-            <Card card={card} key={card.id} openModal={() => openCardModal(card)} />
+            <Card card={card} key={card.name} openModal={() => openCardModal(card)} />
           ))}
         </div>
       ) : (

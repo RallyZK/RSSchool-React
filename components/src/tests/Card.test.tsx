@@ -31,6 +31,7 @@ describe('Card test', () => {
         openModal={function (): void {
           throw new Error('Function not implemented.');
         }}
+        key={''}
       />,
     );
     // expect(screen.getByAltText('test title')).toBeInTheDocument();
