@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import './CardModalWindow.css';
+import React, { FC } from 'react';
 import { IPerson } from '../../utils/types';
 
 interface CardModalWindowProps {

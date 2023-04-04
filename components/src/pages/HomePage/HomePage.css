@@ -13,9 +13,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin: 20px auto;
-  font-size: 30px;
-  font-weight: 800;
-  color: #FFC500;
+  color: #ffe81f;
 }
 
 @media (max-width: 1200px) {

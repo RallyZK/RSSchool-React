@@ -16,19 +16,16 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
     return () => {
       localStorage.setItem('searchPhraseToLS', searchBarRef.current);
     };
-  }, [searchPhrase]);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const phrase = event.target.value;
     setSearchPhrase(phrase);
-    findCharacters(phrase);
   };
 
   const searchCharacter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.code === 'Enter') {
+    if (event.code === 'Enter' && searchPhrase) {
       findCharacters(searchPhrase);
-    } else {
-      return;
     }
   };
 

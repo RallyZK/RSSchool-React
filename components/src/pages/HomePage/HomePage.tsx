@@ -14,15 +14,15 @@ const HomePage = () => {
   const [currentCard, setCurrentCard] = useState(emptyPersonCard);
   const [message, setMessage] = useState('');
 
-  const getCharactersForRender = async () => {
-    setMessage('Progressing...');
-    const response = await getAllCharacters();
-    const data = response.results;
-    setCharacters(data);
-    console.log('response on Home Page:::', data);
-    setIsFullData(true);
-    setMessage('');
-  };
+  // const getCharactersForRender = async () => {
+  //   setMessage('Progressing...');
+  //   const response = await getAllCharacters();
+  //   const data = response.results;
+  //   setCharacters(data);
+  //   console.log('response on Home Page:::', data);
+  //   setIsFullData(true);
+  //   setMessage('');
+  // };
 
   const findCharacters = async (text: string) => {
     setIsFullData(false);
