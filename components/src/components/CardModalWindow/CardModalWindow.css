@@ -1,0 +1,54 @@
+.card-modal-wrapper {
+  width: 450px;
+  height: 300px;
+  padding: 10px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #080802;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  -moz-box-shadow: 4px 4px 45px 52px rgba(1, 1, 0, 0.6);
+  box-shadow: 4px 4px 45px 52px rgba(0, 0, 0, 0.6);
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: none;
+  background-image: url('../../assets/icons/close.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+.card-modal-img {
+  height: 80%;
+  aspect-ratio: 8 / 11;
+}
+
+.card-modal-content {
+  
+}
+
+.card-modal-content h2 {
+
+}
+
+.card-modal-content span {
+  font-weight: 800;
+}
+
+.display-none {
+  display: none;
+}

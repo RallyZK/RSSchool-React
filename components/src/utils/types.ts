@@ -48,6 +48,6 @@ export interface IPerson {
   starships: string[];
   url: string;
   vehicles: string[];
-  id?: number;
-  imgSrc?: string;
+  id: string;
+  imgSrc: string;
 }

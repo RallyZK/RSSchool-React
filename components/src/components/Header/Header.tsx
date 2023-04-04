@@ -5,11 +5,11 @@ const Header = () => {
   const links = [
     {
       link: '/',
-      title: 'Home Page',
+      title: 'Home',
     },
     {
       link: '/about',
-      title: 'About Us',
+      title: 'About',
     },
     {
       link: '/forms',

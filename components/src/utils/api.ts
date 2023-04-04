@@ -11,28 +11,25 @@ export async function getResource(url: string) {
 }
 
 export async function getAllPeople() {
-  //const responce = await getResource('/people');
   const responce = await fetch(`${_apiBase}/people`);
   const data = await responce.json();
-  data.results.forEach((person: IPerson) => {
+  data.results.forEach(async (person: IPerson) => {
     const urlArr = person.url.split('/');
-    const id = +urlArr[urlArr.length - 2];
-    //const imgSrc = await getImageOfPerson(id);
+    const id = urlArr[urlArr.length - 2];
+    const imgSrc = await getImageOfPerson(id);
     person.id = id;
-    //person.imgSrc = imgSrc;
+    person.imgSrc = imgSrc;
   });
-  console.log(data.results);
-  return data.results;
+  console.log('data in api:::', data);
+  return data;
 }
 
 export async function getPerson(id: number) {
   return getResource(`/people/${id}`);
 }
 
-export async function getImageOfPerson(id: number) {
+export async function getImageOfPerson(id: string) {
   const responce = await fetch(`${_apiVisual}${id}.jpg`);
   if (!responce.ok) throw new Error(`Could not fetch: ${responce.status}`);
   return responce.url;
 }
-
-// export const mainArr = await getAllPeople();

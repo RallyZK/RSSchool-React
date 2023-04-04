@@ -21,8 +21,17 @@ describe('Card test', () => {
       starships: [''],
       url: '',
       vehicles: [''],
+      id: '0',
+      imgSrc: '',
     };
-    render(<Card card={testInfo} />);
+    render(
+      <Card
+        card={testInfo}
+        openModal={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />,
+    );
     // expect(screen.getByAltText('test title')).toBeInTheDocument();
     // expect(screen.getByText(/test title/i)).toBeInTheDocument();
     // expect(screen.getByText(/2/i)).toBeInTheDocument();

@@ -37,7 +37,7 @@ h1 {
   list-style-type: none;
   margin-left: 0;
   padding-left: 0;
-  gap: 20px;
+  gap: 5px;
 }
 
 .header-ul {
@@ -104,11 +104,17 @@ a:visited {
   font-weight: 600;
 }
 
-@media (max-width: 505px) {
+@media (max-width: 710px) {
 
-  .page-title {
-    top: -70px;
-    font-size: 14px;
+  .logo {
+    width: 200px;
+  }
+}
+
+@media (max-width: 610px) {
+
+  .logo {
+    width: 100px;
   }
 }
 

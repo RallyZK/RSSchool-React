@@ -50,4 +50,6 @@ export const emptyPersonCard: IPerson = {
   starships: [''],
   url: '',
   vehicles: [''],
+  id: '',
+  imgSrc: '',
 };
