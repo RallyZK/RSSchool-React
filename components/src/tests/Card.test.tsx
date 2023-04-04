@@ -23,6 +23,7 @@ describe('Card test', () => {
       vehicles: [''],
       id: '0',
       imgSrc: '',
+      homePlanet: '',
     };
     render(
       <Card

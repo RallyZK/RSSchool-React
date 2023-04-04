@@ -1,7 +1,7 @@
 import './HomePage.css';
 import { IPerson } from '../../utils/types';
 import Card from '../../components/Card/Card';
-import { getAllPeople, searchCharacter } from '../../utils/api';
+import { getAllCharacters, searchCharacter } from '../../utils/api';
 import React, { useEffect, useState } from 'react';
 import { emptyPersonCard } from '../../utils/details';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -14,9 +14,9 @@ const HomePage = () => {
   const [currentCard, setCurrentCard] = useState(emptyPersonCard);
   const [message, setMessage] = useState('');
 
-  const getAllCharacters = async () => {
+  const getCharactersForRender = async () => {
     setMessage('Progressing...');
-    const response = await getAllPeople();
+    const response = await getAllCharacters();
     const data = response.results;
     setCharacters(data);
     console.log('response on Home Page:::', data);

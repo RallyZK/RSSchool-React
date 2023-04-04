@@ -9,12 +9,12 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
   const searchPhraseFromLS = localStorage.getItem('searchPhraseToLS');
   const [searchPhrase, setSearchPhrase] = useState(searchPhraseFromLS ? searchPhraseFromLS : '');
 
-  // const searchBarRef = useRef('');
-  // searchBarRef.current = searchPhrase;
+  const searchBarRef = useRef('');
+  searchBarRef.current = searchPhrase;
 
   useEffect(() => {
     return () => {
-      localStorage.setItem('searchPhraseToLS', searchPhrase);
+      localStorage.setItem('searchPhraseToLS', searchBarRef.current);
     };
   }, [searchPhrase]);
 

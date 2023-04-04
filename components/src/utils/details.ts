@@ -52,4 +52,5 @@ export const emptyPersonCard: IPerson = {
   vehicles: [''],
   id: '',
   imgSrc: '',
+  homePlanet: '',
 };

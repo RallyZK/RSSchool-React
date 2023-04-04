@@ -49,11 +49,10 @@ height: 100vh;
 }
 
 .card-modal-content {
-  
 }
 
 .card-modal-content h2 {
-
+  margin: 0 0 10px 0;
 }
 
 .card-modal-content span {

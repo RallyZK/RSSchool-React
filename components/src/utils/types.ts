@@ -50,4 +50,12 @@ export interface IPerson {
   vehicles: string[];
   id: string;
   imgSrc: string;
+  homePlanet: string;
+}
+
+export interface IResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: IPerson[];
 }
