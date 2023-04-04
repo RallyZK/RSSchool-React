@@ -1,3 +1,13 @@
+.card-modal-background {
+position: fixed;
+top: 0;
+left: 0;
+background-color: rgba(0, 0, 0, 0.7);
+z-index: 50;
+width: 100vw;
+height: 100vh;
+}
+
 .card-modal-wrapper {
   width: 450px;
   height: 300px;
@@ -13,8 +23,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  -moz-box-shadow: 4px 4px 45px 52px rgba(1, 1, 0, 0.6);
-  box-shadow: 4px 4px 45px 52px rgba(0, 0, 0, 0.6);
+  /* -moz-box-shadow: 4px 4px 45px 52px rgba(1, 1, 0, 0.6);
+  box-shadow: 4px 4px 45px 52px rgba(0, 0, 0, 0.6); */
 }
 
 .close-btn {
@@ -29,12 +39,13 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
+  cursor: pointer;
 }
 
 .card-modal-img {
   height: 80%;
   aspect-ratio: 8 / 11;
+  border-radius: 5px;
 }
 
 .card-modal-content {

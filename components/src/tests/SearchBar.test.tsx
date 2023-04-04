@@ -4,7 +4,13 @@ import { createEvent, fireEvent, render, screen } from '@testing-library/react';
 
 describe('SearchBar test', () => {
   test('SearchBar renders and works correctly', () => {
-    render(<SearchBar />);
+    render(
+      <SearchBar
+        findCharacters={function (text: string): void {
+          throw new Error('Function not implemented.');
+        }}
+      />,
+    );
     const inputElement = screen.getByRole<HTMLInputElement>('textbox');
     const buttonElement = screen.getByRole<HTMLButtonElement>('button');
 
@@ -16,7 +22,13 @@ describe('SearchBar test', () => {
   });
 
   test('Should prevent default action on click', () => {
-    render(<SearchBar />);
+    render(
+      <SearchBar
+        findCharacters={function (text: string): void {
+          throw new Error('Function not implemented.');
+        }}
+      />,
+    );
     const grid = screen.getByRole<HTMLButtonElement>('button');
     const click = createEvent.click(grid);
     fireEvent(grid, click);

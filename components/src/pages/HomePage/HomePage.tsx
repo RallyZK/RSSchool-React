@@ -1,10 +1,10 @@
 import './HomePage.css';
-import React, { useEffect, useState } from 'react';
-import Card from '../../components/Card/Card';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import { emptyPersonCard } from '../../utils/details';
-import { getAllPeople, getImageOfPerson } from '../../utils/api';
 import { IPerson } from '../../utils/types';
+import Card from '../../components/Card/Card';
+import { getAllPeople, searchCharacter } from '../../utils/api';
+import React, { useEffect, useState } from 'react';
+import { emptyPersonCard } from '../../utils/details';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import CardModalWindow from '../../components/CardModalWindow/CardModalWindow';
 
 const HomePage = () => {
@@ -12,37 +12,54 @@ const HomePage = () => {
   const [isFullData, setIsFullData] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState(emptyPersonCard);
+  const [message, setMessage] = useState('');
 
   const getAllCharacters = async () => {
+    setMessage('Progressing...');
     const response = await getAllPeople();
     const data = response.results;
-    // data.forEach(async (person: IPerson) => {
-    //   const imgSrc = await getImageOfPerson(person.id);
-    //   person.imgSrc = imgSrc;
-    // });
     setCharacters(data);
     console.log('response on Home Page:::', data);
     setIsFullData(true);
+    setMessage('');
   };
 
-  useEffect(() => {
-    getAllCharacters();
-  }, []);
+  const findCharacters = async (text: string) => {
+    setIsFullData(false);
+    const response = await searchCharacter(text);
+    const data = response.results;
+    if (response.count > 0) {
+      setIsFullData(true);
+      setMessage('');
+      setCharacters(data);
+    } else {
+      setMessage('No results :( Please, try something else');
+      setCharacters([]);
+    }
+  };
+
+  // useEffect(() => {
+  //   getAllCharacters();
+  // }, []);
 
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
     setCurrentCard(card);
+    document.body.style.height = '100vh';
+    document.body.style.overflowY = 'hidden';
   };
 
   const closeCardModal = () => {
     setIsModalOpen(false);
+    document.body.style.height = '';
+    document.body.style.overflowY = '';
   };
 
   return (
     <div className='page'>
       <h3 className='page-title'>Home Page</h3>
       <h1>Star Wars universe characters</h1>
-      <SearchBar />
+      <SearchBar findCharacters={findCharacters} />
       {isFullData ? (
         <div className='cards-wrapper'>
           {characters.map((card: IPerson) => (
@@ -50,7 +67,7 @@ const HomePage = () => {
           ))}
         </div>
       ) : (
-        <p className='loader'>Progressing...</p>
+        <p className='loader'>{message}</p>
       )}
       <CardModalWindow isModalOpen={isModalOpen} closeModal={closeCardModal} card={currentCard} />
     </div>

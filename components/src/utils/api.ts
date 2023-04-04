@@ -33,3 +33,14 @@ export async function getImageOfPerson(id: string) {
   if (!responce.ok) throw new Error(`Could not fetch: ${responce.status}`);
   return responce.url;
 }
+
+export async function searchCharacter(text: string) {
+  // https://swapi.dev/api/people/?search=r
+  const str = `${_apiBase}/people/?search=${text}`;
+  console.log('str:::', str);
+  const responce = await fetch(str);
+  if (!responce.ok) throw new Error(`Could not fetch: ${responce.status}`);
+  const data = await responce.json();
+  console.log('data in search:::', data);
+  return data;
+}
