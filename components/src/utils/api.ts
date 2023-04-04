@@ -6,20 +6,23 @@ const _apiVisual = 'https://starwars-visualguide.com/assets/img/characters/';
 export async function getResource(url: string) {
   const responce = await fetch(`${_apiBase}${url}`);
   if (!responce.ok) throw new Error(`Could not fetch: ${responce.status}`);
-  return await responce.json();
+  const data = await responce.json();
+  return data;
 }
 
 export async function getAllPeople() {
-  const responce = await getResource('/people');
-  responce.results.forEach(async (person: IPerson) => {
+  //const responce = await getResource('/people');
+  const responce = await fetch(`${_apiBase}/people`);
+  const data = await responce.json();
+  data.results.forEach((person: IPerson) => {
     const urlArr = person.url.split('/');
     const id = +urlArr[urlArr.length - 2];
-    const imgSrc = await getImageOfPerson(id);
+    //const imgSrc = await getImageOfPerson(id);
     person.id = id;
-    person.imgSrc = imgSrc;
+    //person.imgSrc = imgSrc;
   });
-  console.log(responce.results);
-  return responce;
+  console.log(data.results);
+  return data.results;
 }
 
 export async function getPerson(id: number) {

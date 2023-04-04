@@ -7,13 +7,19 @@ import { getAllPeople, getImageOfPerson } from '../../utils/api';
 import { IPerson } from '../../utils/types';
 
 const HomePage = () => {
-  const [people, setPeople] = useState([emptyPersonCard]);
-  const getArr = async () => {
+  const [characters, setCharacters] = useState([emptyPersonCard]);
+  const getAllCharacters = async () => {
     const arr = await getAllPeople();
-    return arr;
+    arr.forEach(async (person: IPerson) => {
+      const imgSrc = person.id ? await getImageOfPerson(person.id) : '';
+      person.imgSrc = imgSrc;
+    });
+    setCharacters(arr);
   };
 
-  // setPeople(getArr());
+  useEffect(() => {
+    getAllCharacters();
+  }, []);
 
   return (
     <div className='page'>
@@ -21,7 +27,7 @@ const HomePage = () => {
       <h1>Star Wars universe characters</h1>
       <SearchBar />
       <div className='cards-wrapper'>
-        {people.map((card: IPerson) => (
+        {characters.map((card: IPerson) => (
           <Card card={card} key={card.name} />
         ))}
       </div>

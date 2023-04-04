@@ -10,13 +10,9 @@ type Props = {
 const Card: FC<Props> = ({ card }) => {
   return (
     <div className='card'>
-      <img
-        className='card-img'
-        src={'https://starwars-visualguide.com/assets/img/characters/1.jpg'}
-        alt={card.name}
-      ></img>
+      <img className='card-img' src={card.imgSrc} alt={card.name}></img>
       <div className='card-content'>
-        <h4>{card.name} Luke Skywalker</h4>
+        <h4>{card.name}</h4>
         <p className='card-location'>Birth year: {card.birth_year}</p>
         <p className='card-price'>Gender: {card.gender}</p>
         <a className='card-button' href={card.url} rel='noreferrer' target='_blank'>
