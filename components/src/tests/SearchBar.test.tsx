@@ -1,37 +1,23 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar/SearchBar';
-import { createEvent, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { emptyPersonCard } from '../utils/details';
 
 describe('SearchBar test', () => {
   test('SearchBar renders and works correctly', () => {
-    render(
-      <SearchBar
-        findCharacters={function (text: string): void {
-          throw new Error('Function not implemented.');
-        }}
-      />,
-    );
+    const mockJsonPromise = Promise.resolve({ count: 1, next: 'next', previous: 'prev', results: emptyPersonCard });
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+
+    render(<SearchBar findCharacters={global.fetch} />);
     const inputElement = screen.getByRole<HTMLInputElement>('textbox');
-    const buttonElement = screen.getByRole<HTMLButtonElement>('button');
-
     expect(inputElement).toBeInTheDocument();
-    expect(buttonElement).toBeInTheDocument();
 
-    fireEvent.change(inputElement, { target: { value: 'test text' } });
-    expect(inputElement.value).toBe('test text');
-  });
+    fireEvent.change(inputElement, { target: { value: 'r2-d2' } });
+    expect(inputElement.value).toBe('r2-d2');
 
-  test('Should prevent default action on click', () => {
-    render(
-      <SearchBar
-        findCharacters={function (text: string): void {
-          throw new Error('Function not implemented.');
-        }}
-      />,
-    );
-    const grid = screen.getByRole<HTMLButtonElement>('button');
-    const click = createEvent.click(grid);
-    fireEvent(grid, click);
-    expect(click.defaultPrevented).toBe(false);
+    fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter', charCode: 13 });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith('r2-d2');
   });
 });

@@ -17,7 +17,7 @@ const HomePage = () => {
 
   const findCharacters = async (text: string) => {
     setIsResponseReceived(false);
-    setMessage(<p className='loader'>Searching in The Galaxy far, far away...</p>);
+    setMessage(<p className='loader'>Searching in a galaxy far, far away...</p>);
     const response = await searchCharacter(text);
     const data = response.results;
     if (response.count > 0) {
@@ -34,13 +34,11 @@ const HomePage = () => {
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
     setCurrentCard(card);
-    document.body.style.height = '100vh';
     document.body.style.overflowY = 'hidden';
   };
 
   const closeCardModal = () => {
     setIsModalOpen(false);
-    document.body.style.height = '';
     document.body.style.overflowY = '';
   };
 

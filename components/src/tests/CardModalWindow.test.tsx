@@ -1,9 +1,10 @@
 import React from 'react';
-import Card from '../components/Card/Card';
 import { render, screen } from '@testing-library/react';
+import CardModalWindow from '../components/CardModalWindow/CardModalWindow';
+import { IPerson } from '../utils/types';
 
-describe('Card test', () => {
-  test('Card renders correctly', async () => {
+describe('CardModalWindow test', () => {
+  test('CardModalWindow renders correctly', async () => {
     const testInfo = {
       birth_year: '1000',
       created: '',
@@ -25,19 +26,24 @@ describe('Card test', () => {
       imgSrc: '',
     };
     render(
-      <Card
+      <CardModalWindow
         card={testInfo}
-        openModal={function (): void {
+        isModalOpen={false}
+        closeModal={function (card: IPerson): void {
           throw new Error('Function not implemented.');
         }}
-        key={''}
       />,
     );
     expect(screen.getByAltText('Name')).toBeInTheDocument();
     expect(screen.getByText(/name/i)).toBeInTheDocument();
     expect(screen.getByText(/1000/i)).toBeInTheDocument();
+    expect(screen.getByText(/black/i)).toBeInTheDocument();
+    expect(screen.getByText(/brown/i)).toBeInTheDocument();
+    expect(screen.getByText(/170/i)).toBeInTheDocument();
+    expect(screen.getByText(/80/i)).toBeInTheDocument();
+    expect(screen.getByText(/1000/i)).toBeInTheDocument();
 
-    const btn = await screen.findByRole('button', { name: /more details/i });
+    const btn = await screen.findByRole('button', {});
     expect(btn).toBeInTheDocument();
   });
 });

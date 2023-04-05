@@ -8,6 +8,5 @@ describe('FormsPage test', () => {
     const titles = screen.getAllByText(/forms/i);
     expect(titles[0]).toBeInTheDocument();
     expect(titles[1]).toBeInTheDocument();
-    expect(screen.getByText(/Plan your visit to Dubai:/i)).toBeInTheDocument();
   });
 });

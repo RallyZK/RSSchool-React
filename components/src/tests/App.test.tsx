@@ -7,6 +7,6 @@ describe('App test', () => {
     render(<App />);
     const titles = screen.getAllByText(/home page/i);
     expect(titles[0]).toBeInTheDocument();
-    expect(screen.getByText(/Live the life you deserve/i)).toBeInTheDocument();
+    expect(screen.getByText(/Star Wars universe characters/i)).toBeInTheDocument();
   });
 });

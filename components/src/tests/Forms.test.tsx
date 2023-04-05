@@ -57,6 +57,21 @@ describe('Forms test', () => {
     expect(screen.getByText(/no/i)).toBeInTheDocument();
   });
 
+  test('Select renders correctly', () => {
+    render(
+      <Forms
+        createNewCard={function (newCard: IData): void {
+          throw new Error('Function not implemented.');
+        }}
+        openModal={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />,
+    );
+    const selects = screen.getAllByRole<HTMLSelectElement>('combobox');
+    expect(screen.getByText(/Select a purpose/i)).toBeInTheDocument();
+  });
+
   test('Submit button renders correctly', () => {
     render(
       <Forms

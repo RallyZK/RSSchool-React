@@ -10,8 +10,8 @@ describe('Header test', () => {
         <Header />
       </BrowserRouter>,
     );
-    expect(screen.getByText(/home page/i)).toBeInTheDocument();
-    expect(screen.getByText(/about us/i)).toBeInTheDocument();
+    expect(screen.getByText(/home/i)).toBeInTheDocument();
+    expect(screen.getByText(/about/i)).toBeInTheDocument();
     expect(screen.getByText(/forms/i)).toBeInTheDocument();
   });
 });

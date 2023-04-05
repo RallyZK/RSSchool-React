@@ -14,11 +14,6 @@ export const noResultsText = (
         </p>
 
         <p>
-          Remember, even the smallest spark of hope can ignite a great flame. Perhaps one day, the information you seek
-          will reveal itself to you in a way you never imagined possible.
-        </p>
-
-        <p>
           Until then, remember the words of the legendary Jedi Master Obi-Wan Kenobi: «The Force will be with you,
           always.»
         </p>
@@ -33,12 +28,7 @@ export const noResultsText = (
           воображения. Как бы то ни было, мы призываем вас не терять надежду.
         </p>
 
-        <p>
-          Помните, даже малейшая искра надежды может разжечь большое пламя. Возможно, однажды информация, которую вы
-          ищете, откроется вам так, как вы и представить себе не могли.
-        </p>
-
-        <p>И помните слова легендарного мастера-джедая Оби-Вана Кеноби: «Сила всегда будет с вами».</p>
+        <p>И помните слова легендарного мастера-джедая Оби-Вана Кеноби: «Да пребудет с вами Сила».</p>
       </div>
     </div>
   </div>
