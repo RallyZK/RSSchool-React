@@ -10,9 +10,13 @@ type Props = {
 const Layout: FC<Props> = ({ children }) => {
   return (
     <div className='layout'>
-      <Header />
-      <main id='main'>{children}</main>
-      <Footer />
+      <div className='stars'>
+        <div className='twinkling'>
+          <Header />
+          <main id='main'>{children}</main>
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };

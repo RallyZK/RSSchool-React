@@ -1,7 +1,6 @@
 #root {
   color: #ffffff;
   background: radial-gradient(ellipse at bottom, #1C2837 0%, #050608 100%);
-  background-attachment: fixed;
 }
 
 h1 {

@@ -1,46 +1,35 @@
 import './HomePage.css';
+import React, { useState } from 'react';
 import { IPerson } from '../../utils/types';
 import Card from '../../components/Card/Card';
-import { getAllCharacters, searchCharacter } from '../../utils/api';
-import React, { useEffect, useState } from 'react';
+import { searchCharacter } from '../../utils/api';
 import { emptyPersonCard } from '../../utils/details';
+import { noResultsText } from '../../utils/noResultsText';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardModalWindow from '../../components/CardModalWindow/CardModalWindow';
 
 const HomePage = () => {
-  const [message, setMessage] = useState('');
-  const [isFullData, setIsFullData] = useState(false);
+  const [message, setMessage] = useState(<div></div>);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [characters, setCharacters] = useState([emptyPersonCard]);
-  const [currentCard, setCurrentCard] = useState(emptyPersonCard);
-
-  // const getCharactersForRender = async () => {
-  //   setMessage('Progressing...');
-  //   const response = await getAllCharacters();
-  //   const data = response.results;
-  //   setCharacters(data);
-  //   console.log('response on Home Page:::', data);
-  //   setIsFullData(true);
-  //   setMessage('');
-  // };
+  const [isResponseReceived, setIsResponseReceived] = useState(false);
+  const [characters, setCharacters] = useState<IPerson[]>([]);
+  const [currentCard, setCurrentCard] = useState<IPerson>(emptyPersonCard);
 
   const findCharacters = async (text: string) => {
-    setIsFullData(false);
+    setIsResponseReceived(false);
+    setMessage(<p className='loader'>Searching in The Galaxy far, far away...</p>);
     const response = await searchCharacter(text);
     const data = response.results;
     if (response.count > 0) {
-      setIsFullData(true);
-      setMessage('');
+      setIsResponseReceived(true);
+      setMessage(<div></div>);
       setCharacters(data);
     } else {
-      setMessage('No results :( Please, try to search something else');
+      setIsResponseReceived(false);
+      setMessage(noResultsText);
       setCharacters([]);
     }
   };
-
-  // useEffect(() => {
-  //   getAllCharacters();
-  // }, []);
 
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
@@ -60,14 +49,14 @@ const HomePage = () => {
       <h3 className='page-title'>Home Page</h3>
       <h1>Star Wars universe characters</h1>
       <SearchBar findCharacters={findCharacters} />
-      {isFullData ? (
+      {isResponseReceived ? (
         <div className='cards-wrapper'>
           {characters.map((card: IPerson) => (
             <Card card={card} key={card.name} openModal={() => openCardModal(card)} />
           ))}
         </div>
       ) : (
-        <p className='loader'>{message}</p>
+        <div>{message}</div>
       )}
       <CardModalWindow isModalOpen={isModalOpen} closeModal={closeCardModal} card={currentCard} />
     </div>

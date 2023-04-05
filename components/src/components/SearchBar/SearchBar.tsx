@@ -24,8 +24,9 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
   };
 
   const searchCharacter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.code === 'Enter' && searchPhrase) {
+    if (event.code === 'Enter') {
       findCharacters(searchPhrase);
+      localStorage.setItem('searchPhraseToLS', searchPhrase);
     }
   };
 
@@ -35,6 +36,7 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
 
   return (
     <form className='search-bar' onSubmit={(event) => handleFormSubmit(event)}>
+      <div className='magnifier'></div>
       <input
         placeholder='Enter character name. Example: Luke Skywalker'
         className='search-input'
@@ -42,7 +44,6 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
         onChange={(event) => handleChange(event)}
         onKeyDown={(event) => searchCharacter(event)}
       ></input>
-      <button className='search-button' type='submit'></button>
     </form>
   );
 };

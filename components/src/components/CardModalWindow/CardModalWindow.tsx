@@ -44,10 +44,6 @@ const CardModalWindow: FC<CardModalWindowProps> = ({ isModalOpen, closeModal, ca
             <span>Skin color: </span>
             {card.skin_color}
           </p>
-          <p>
-            <span>Home planet: </span>
-            {card.homePlanet}
-          </p>
         </div>
       </div>
     </div>
