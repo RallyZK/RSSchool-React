@@ -68,8 +68,28 @@ describe('Forms test', () => {
         }}
       />,
     );
-    const selects = screen.getAllByRole<HTMLSelectElement>('combobox');
+    const selects = screen.getByRole<HTMLSelectElement>('combobox');
+    expect(selects).toBeInTheDocument();
     expect(screen.getByText(/Select a purpose/i)).toBeInTheDocument();
+  });
+
+  test('File input renders correctly', () => {
+    render(
+      <Forms
+        createNewCard={function (newCard: IData): void {
+          throw new Error('Function not implemented.');
+        }}
+        openModal={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />,
+    );
+    const testFile = new File(['hello'], 'hello.png', { type: 'image/png' });
+    const fileInput = screen.getByLabelText<HTMLInputElement>('Upload a photo:');
+    expect(fileInput).toBeInTheDocument();
+
+    userEvent.upload(fileInput, testFile);
+    expect(fileInput.files).toHaveLength(1);
   });
 
   test('Submit button renders correctly', () => {

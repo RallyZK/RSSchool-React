@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { IPerson } from '../../utils/types';
 import Card from '../../components/Card/Card';
 import { searchCharacter } from '../../utils/api';
-import { emptyPersonCard } from '../../utils/details';
 import { noResultsText } from '../../utils/noResultsText';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardModalWindow from '../../components/CardModalWindow/CardModalWindow';
@@ -13,7 +12,7 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResponseReceived, setIsResponseReceived] = useState(false);
   const [characters, setCharacters] = useState<IPerson[]>([]);
-  const [currentCard, setCurrentCard] = useState<IPerson>(emptyPersonCard);
+  const [currentCard, setCurrentCard] = useState<IPerson | null>(null);
 
   const findCharacters = async (text: string) => {
     setIsResponseReceived(false);
@@ -34,12 +33,10 @@ const HomePage = () => {
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
     setCurrentCard(card);
-    document.body.style.overflowY = 'hidden';
   };
 
   const closeCardModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflowY = '';
   };
 
   return (

@@ -112,10 +112,15 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
           render={({ field: { onChange }, fieldState: { error } }) => {
             return (
               <div className='input-wrapper'>
-                <p className='label'>
+                <label htmlFor='file' className='label'>
                   Upload a photo: <span className='error'>{error && error.message}</span>
-                </p>
-                <input type='file' accept='image/*,.png,.jpg' onChange={(e) => onChange(e.target.files?.[0])} />
+                </label>
+                <input
+                  id='file'
+                  type='file'
+                  accept='image/*,.png,.jpg'
+                  onChange={(e) => onChange(e.target.files?.[0])}
+                />
               </div>
             );
           }}
