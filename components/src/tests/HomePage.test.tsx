@@ -1,6 +1,7 @@
 import React from 'react';
 import HomePage from '../pages/HomePage/HomePage';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('HomePage test', () => {
   test('Home Page renders correctly', () => {
@@ -12,8 +13,7 @@ describe('HomePage test', () => {
   test('Search characters works correctly', async () => {
     render(<HomePage />);
     const inputElement = screen.getByRole<HTMLInputElement>('textbox');
-
-    fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter', charCode: 13 });
+    userEvent.type(inputElement, '{enter}');
     await waitFor(() => screen.findByText('test name'));
     expect(screen.getByText('test name')).toBeInTheDocument();
   });

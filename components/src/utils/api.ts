@@ -5,7 +5,6 @@ const _apiBase = 'https://swapi.dev/api/people';
 export async function searchCharacter(text: string) {
   const responce = await fetch(`${_apiBase}/?search=${text}`);
   const data = await responce.json();
-  console.log('data in search:::', data);
   return updateResponseData(data);
 }
 
