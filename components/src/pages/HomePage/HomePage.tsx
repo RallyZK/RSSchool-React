@@ -1,5 +1,5 @@
 import './HomePage.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IPerson } from '../../utils/types';
 import Card from '../../components/Card/Card';
 import { searchCharacter } from '../../utils/api';
@@ -29,6 +29,11 @@ const HomePage = () => {
       setCharacters([]);
     }
   };
+
+  useEffect(() => {
+    const searchFromLS = localStorage.getItem('searchPhraseToLS');
+    searchFromLS ? findCharacters(searchFromLS) : findCharacters('');
+  }, []);
 
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
