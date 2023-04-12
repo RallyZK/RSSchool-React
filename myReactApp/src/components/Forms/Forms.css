@@ -1,0 +1,81 @@
+h3, h5, p {
+  margin: 0;
+}
+
+.forms-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 470px;
+  margin: 5px 0;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.mini-label {
+display: flex;
+gap: 5px;
+}
+
+.input-name,
+.input-date {
+  height: 38px;
+  padding: 0 5px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.input-select {
+  height: 25px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.uploaded-pic {
+  width: 200px;
+  height: 150px;
+}
+
+.error {
+  color: #f1c40f;
+}
+
+.db-button {
+  text-decoration: none;
+    display: inline-block;
+    margin: 20px auto;
+    padding: 10px 30px;
+    position: relative;
+    border: 2px solid #f1c40f;
+    color: #f1c40f;
+    transition: 0.4s;
+    background: transparent;
+}
+
+.db-button:after {
+  content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: .4s;
+}
+
+.db-button:hover:after {
+  border-color: #f1c40f;
+  width: calc(100% - 10px);
+  height: calc(100% + 10px);
+}
