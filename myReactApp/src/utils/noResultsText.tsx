@@ -1,3 +1,5 @@
+export const emptyError = <div></div>;
+
 export const noResultsText = (
   <div>
     <p id='start'></p>
