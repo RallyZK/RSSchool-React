@@ -1,7 +1,7 @@
-import { charactersSlice } from './СharactersSlice';
-import { AppDispatch } from '../store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IPerson, IResponse } from '../../utils/types';
+import { AppDispatch } from '../store';
+import { charactersSlice } from './СharactersSlice';
 
 const _apiBase = 'https://swapi.dev/api/people';
 
@@ -28,3 +28,7 @@ export const fetchCharacters = createAsyncThunk('characters/Search', async (text
     return thunkAPI.rejectWithValue('Fetching Error');
   }
 });
+
+export const setSearchPhrase = (phrase: string) => (dispatch: AppDispatch) => {
+  dispatch(charactersSlice.actions.setSearchPhrase(phrase));
+};

@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import сharactersReducer from './reducers/СharactersSlice';
+import cardsReduser from './reducers/cards/CardsSlice';
 
 const rootReducer = combineReducers({
   сharactersReducer,
+  cardsReduser,
 });
 
 export const setupStore = () => {

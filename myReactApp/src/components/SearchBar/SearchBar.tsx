@@ -1,32 +1,32 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
 import './SearchBar.css';
-
+import React, { FC, useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { setSearchPhrase } from '../../store/reducers/ActionCreator';
 interface SearchBarProps {
   findCharacters: (text: string) => void;
 }
 
 const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
-  const searchPhraseFromLS = localStorage.getItem('searchPhraseToLS');
-  const [searchPhrase, setSearchPhrase] = useState(searchPhraseFromLS ? searchPhraseFromLS : '');
+  const dispatch = useAppDispatch();
+  const { searchPhrase } = useAppSelector((state) => state.сharactersReducer);
 
   const searchBarRef = useRef('');
   searchBarRef.current = searchPhrase;
 
   useEffect(() => {
     return () => {
-      localStorage.setItem('searchPhraseToLS', searchBarRef.current);
+      dispatch(setSearchPhrase(searchBarRef.current));
     };
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const phrase = event.target.value;
-    setSearchPhrase(phrase);
+    dispatch(setSearchPhrase(phrase));
   };
 
   const searchCharacter = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter') {
       findCharacters(searchPhrase);
-      localStorage.setItem('searchPhraseToLS', searchPhrase);
     }
   };
 
@@ -38,11 +38,11 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
     <form className='search-bar' onSubmit={(event) => handleFormSubmit(event)}>
       <div className='magnifier'></div>
       <input
-        placeholder='Enter character name. Example: Luke Skywalker'
-        className='search-input'
         value={searchPhrase}
+        className='search-input'
         onChange={(event) => handleChange(event)}
         onKeyDown={(event) => searchCharacter(event)}
+        placeholder='Enter character name. Example: Luke Skywalker'
       ></input>
     </form>
   );

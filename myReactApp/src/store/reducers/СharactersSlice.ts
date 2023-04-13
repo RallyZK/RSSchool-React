@@ -19,7 +19,11 @@ const initialState: CharactersState = {
 export const charactersSlice = createSlice({
   name: 'characters',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchPhrase: (state, action: PayloadAction<string>) => {
+      state.searchPhrase = action.payload;
+    },
+  },
   extraReducers: {
     [fetchCharacters.fulfilled.type]: (state, action: PayloadAction<IPerson[]>) => {
       state.isLoading = false;
