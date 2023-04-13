@@ -1,15 +1,30 @@
-import { noResultsText } from '../../utils/noResultsText';
-import { searchCharacter } from '../../utils/api';
-import { userSlice } from './UserSlice';
+import { charactersSlice } from './СharactersSlice';
 import { AppDispatch } from '../store';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { IPerson, IResponse } from '../../utils/types';
 
-export const fetchUsers = (text: string) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(userSlice.actions.charactersFetching());
-    const response = await searchCharacter(text);
-    console.log(response.results);
-    dispatch(userSlice.actions.charactersFetchingSuccess(response.results));
-  } catch (e) {
-    dispatch(userSlice.actions.charactersFetchingError('No Data'));
-  }
+const _apiBase = 'https://swapi.dev/api/people';
+
+export async function searchCharacter(text: string) {
+  const responce = await fetch(`${_apiBase}/?search=${text}`);
+  const data = await responce.json();
+  return updateResponseData(data);
+}
+
+const updateResponseData = (data: IResponse) => {
+  data.results.forEach((person: IPerson) => {
+    const urlArr = person.url.split('/');
+    person.id = urlArr[urlArr.length - 2];
+    person.imgSrc = `https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`;
+  });
+  return data;
 };
+
+export const fetchCharacters = createAsyncThunk('characters/Search', async (text: string, thunkAPI) => {
+  try {
+    const response = await searchCharacter(text);
+    return response.results;
+  } catch (e) {
+    return thunkAPI.rejectWithValue('Fetching Error');
+  }
+});
