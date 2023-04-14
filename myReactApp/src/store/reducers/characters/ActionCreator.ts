@@ -1,7 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IPerson, IResponse } from '../../utils/types';
-import { AppDispatch } from '../store';
+import { AppDispatch } from '../../store';
 import { charactersSlice } from './CharactersSlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { IPerson, IResponse } from '../../../utils/types';
 
 const _apiBase = 'https://swapi.dev/api/people';
 

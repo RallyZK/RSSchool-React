@@ -1,7 +1,7 @@
 import './SearchBar.css';
 import React, { FC, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setSearchPhrase } from '../../store/reducers/ActionCreator';
+import { setSearchPhrase } from '../../store/reducers/characters/ActionCreator';
 interface SearchBarProps {
   findCharacters: (text: string) => void;
 }

@@ -37,8 +37,8 @@ describe('Forms test', () => {
 
     const checkbox = screen.getByRole<HTMLInputElement>('checkbox');
     expect(checkbox).toBeInTheDocument();
-    expect(screen.getByText(/I agree/i)).toBeInTheDocument();
-    expect(screen.getByText(/Consent on personal data processing/i)).toBeInTheDocument();
+    expect(screen.getByText(/I confirm/i)).toBeInTheDocument();
+    expect(screen.getByText(/Confirm the information you entered/i)).toBeInTheDocument();
   });
 
   test('Radio buttons render correctly', () => {
@@ -56,8 +56,8 @@ describe('Forms test', () => {
     const radiobtns = screen.getAllByRole<HTMLInputElement>('radio');
     expect(radiobtns[0]).toBeInTheDocument();
     expect(radiobtns[1]).toBeInTheDocument();
-    expect(screen.getByText(/yes/i)).toBeInTheDocument();
-    expect(screen.getByText(/no/i)).toBeInTheDocument();
+    expect(screen.getByText('Living being')).toBeInTheDocument();
+    expect(screen.getByText('Droid')).toBeInTheDocument();
   });
 
   test('Select renders correctly', () => {
@@ -74,7 +74,7 @@ describe('Forms test', () => {
 
     const selects = screen.getByRole<HTMLSelectElement>('combobox');
     expect(selects).toBeInTheDocument();
-    expect(screen.getByText(/Select a purpose/i)).toBeInTheDocument();
+    expect(screen.getByText(/Select a gender/i)).toBeInTheDocument();
   });
 
   test('File input renders correctly', () => {

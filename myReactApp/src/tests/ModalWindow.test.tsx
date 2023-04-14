@@ -12,6 +12,7 @@ describe('ModalWindow test', () => {
         }}
       />,
     );
-    expect(screen.getByText(/You information is successfully saved!/i)).toBeInTheDocument();
+    expect(screen.getByText(/A new character was successfully created!/i)).toBeInTheDocument();
+    expect(screen.getByText(/May the Force be with you/i)).toBeInTheDocument();
   });
 });

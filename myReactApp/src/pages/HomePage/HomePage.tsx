@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './HomePage.css';
 import { IPerson } from '../../utils/types';
 import Card from '../../components/Card/Card';
@@ -5,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { noResultsText } from '../../utils/noResultsText';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchCharacters } from '../../store/reducers/ActionCreator';
+import { fetchCharacters } from '../../store/reducers/characters/ActionCreator';
 import CardModalWindow from '../../components/CardModalWindow/CardModalWindow';
 
 const HomePage = () => {

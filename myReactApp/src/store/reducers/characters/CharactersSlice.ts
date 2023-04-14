@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IPerson } from '../../utils/types';
+import { IPerson } from '../../../utils/types';
 import { fetchCharacters } from './ActionCreator';
 
 interface CharactersState {

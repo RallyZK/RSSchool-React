@@ -1,5 +1,20 @@
 import { IOption, IPerson } from './types';
 
+export const selectOptions: IOption[] = [
+  {
+    value: 'Male',
+    label: 'Male',
+  },
+  {
+    value: 'Female',
+    label: 'Female',
+  },
+  {
+    value: 'N/a',
+    label: 'N/a',
+  },
+];
+
 export const radioOptions: IOption[] = [
   {
     value: 'Living being',

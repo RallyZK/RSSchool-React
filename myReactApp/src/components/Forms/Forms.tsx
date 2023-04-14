@@ -2,16 +2,7 @@ import './Forms.css';
 import React, { FC } from 'react';
 import { radioOptions } from '../../utils/details';
 import { IData, IOption } from '../../utils/types';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import {
-  setName,
-  setDate,
-  setGender,
-  setCharacterType,
-  setFile,
-  setAgree,
-} from '../../store/reducers/forms/ActionCreator';
 interface FormsProps {
   createNewCard: (newCard: IData) => void;
   openModal: () => void;
@@ -20,8 +11,6 @@ interface FormsProps {
 const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
   const { register, formState, handleSubmit, control, reset } = useForm<IData>();
   const { errors } = formState;
-  const dispatch = useAppDispatch();
-  const { name, date, gender, characterType, file, agree } = useAppSelector((state) => state.formsReducer);
 
   const onSubmit: SubmitHandler<IData> = (data: IData) => {
     const file = URL.createObjectURL(new Blob([data.file]));
@@ -29,43 +18,6 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
     createNewCard(data);
     openModal();
     reset();
-    setInitialState();
-  };
-
-  const setNameToState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setName(e.target.value));
-  };
-
-  const setDateToState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setDate(e.target.value));
-  };
-
-  const setGenderToState = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setGender(e.target.value));
-  };
-
-  const setCharacterTypeToState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setCharacterType(e.target.value));
-    e.target.checked = true;
-  };
-
-  const setAgreeToState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setAgree(e.target.checked));
-  };
-
-  const setFileToState = (uploadedFile: File | undefined) => {
-    const file = uploadedFile ? URL.createObjectURL(new Blob([uploadedFile])) : undefined;
-    dispatch(setFile(file));
-    console.log('state', file);
-  };
-
-  const setInitialState = () => {
-    dispatch(setName(''));
-    dispatch(setDate(''));
-    dispatch(setGender(''));
-    dispatch(setCharacterType(''));
-    dispatch(setFile(undefined));
-    dispatch(setAgree(false));
   };
 
   return (
@@ -91,8 +43,6 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
             })}
             className='input'
             placeholder='Enter character name here'
-            value={name}
-            onChange={(e) => setNameToState(e)}
           ></input>
         </div>
         <div className='input-wrapper'>
@@ -110,8 +60,6 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
               },
             })}
             className='input'
-            value={date}
-            onChange={(e) => setDateToState(e)}
           ></input>
         </div>
         <div className='input-wrapper'>
@@ -121,11 +69,10 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
           <select
             {...register('gender', {
               required: 'Please, select a gender',
-              validate: (v) => v !== '0' || 'error message',
+              validate: (v) => v !== '' || 'error message',
             })}
-            defaultValue={gender}
-            onChange={(e) => setGenderToState(e)}
             className='input'
+            defaultValue={''}
           >
             <option value='' disabled>
               Select a gender
@@ -147,28 +94,12 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
                 name='characterType'
                 type='radio'
                 value={el.value}
-                onChange={(e) => setCharacterTypeToState(e)}
-                defaultChecked={el.value === characterType}
               ></input>
               {el.value}
             </label>
           ))}
         </div>
-        <div className='input-wrapper'>
-          <p className='label'>
-            Upload a photo: <span className='error'>{errors?.file?.message?.toString()}</span>
-          </p>
-          <input
-            type='file'
-            accept='image/*,.png,.jpg'
-            {...register('file', {
-              required: 'Please, upload a file',
-            })}
-            defaultValue={file}
-            onChange={(e) => setFileToState(e.target.files?.[0])}
-          ></input>
-        </div>
-        {/* <Controller
+        <Controller
           name='file'
           control={control}
           rules={{
@@ -189,7 +120,7 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
               </div>
             );
           }}
-        /> */}
+        />
         <div className='input-wrapper'>
           <p className='label'>Confirm the information you entered</p>
           <p className='label error'>{errors?.agree?.message?.toString()}</p>
@@ -199,8 +130,6 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
                 required: 'Please, confirm consent',
               })}
               type='checkbox'
-              onChange={(e) => setAgreeToState(e)}
-              defaultChecked={agree}
             ></input>
             I confirm
           </label>

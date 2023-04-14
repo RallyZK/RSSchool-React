@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import сharactersReducer from './reducers/CharactersSlice';
+import сharactersReducer from './reducers/characters/CharactersSlice';
 import formsReducer from './reducers/forms/FormsSlice';
 
 const rootReducer = combineReducers({
