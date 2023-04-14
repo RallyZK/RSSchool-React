@@ -20,7 +20,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (characters.length === 0) dispatch(fetchCharacters(searchPhrase));
-  }, [characters, dispatch, searchPhrase]);
+  }, []);
 
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);

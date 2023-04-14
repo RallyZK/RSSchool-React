@@ -7,9 +7,9 @@ describe('CardInForms test', () => {
     const testInfo = {
       name: 'test name',
       date: '01-01-2023',
-      purpose: 'test purpose',
+      gender: 'test purpose',
       agree: 'no',
-      transfer: 'yes',
+      characterType: 'droid',
       file: 'url',
     };
     render(<CardInForms card={testInfo} />);
@@ -17,6 +17,6 @@ describe('CardInForms test', () => {
     expect(screen.getByRole('img', { name: /test name/i })).toBeInTheDocument();
     expect(screen.getByText(/test name/i)).toBeInTheDocument();
     expect(screen.getByText(/test purpose/i)).toBeInTheDocument();
-    expect(screen.getByText(/yes/i)).toBeInTheDocument();
+    expect(screen.getByText(/droid/i)).toBeInTheDocument();
   });
 });

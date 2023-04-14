@@ -37,6 +37,7 @@ export const charactersSlice = createSlice({
     [fetchCharacters.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.message = action.payload;
+      state.message = '';
     },
   },
 });

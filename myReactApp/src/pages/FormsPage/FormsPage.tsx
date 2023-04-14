@@ -1,17 +1,18 @@
 import './FormsPage.css';
 import React, { useState } from 'react';
 import { IData } from '../../utils/types';
-import { emptyCard } from '../../utils/details';
 import Forms from '../../components/Forms/Forms';
+import { useAppDispatch } from '../../hooks/redux';
 import CardsList from '../../components/CardsList/CardsList';
 import ModalWindow from '../../components/ModalWindow/ModalWindow';
+import { setCard } from '../../store/reducers/forms/ActionCreator';
 
 const FormsPage = () => {
-  const [cards, setCards] = useState([emptyCard]);
+  const dispatch = useAppDispatch();
   const [isImgModalOpen, setIsImgModalOpen] = useState(false);
 
   const handleChange = (newCard: IData) => {
-    setCards([...cards, newCard]);
+    dispatch(setCard(newCard));
   };
 
   const openImgModal = () => {
@@ -24,10 +25,10 @@ const FormsPage = () => {
 
   return (
     <div className='page'>
-      <h1>Forms</h1>
+      <h1>Create new character</h1>
       <h3 className='page-title'>Forms</h3>
       <Forms createNewCard={handleChange} openModal={openImgModal} />
-      <CardsList cards={cards} />
+      <CardsList />
       <ModalWindow isModalOpen={isImgModalOpen} closeModal={closeImgModal} />
     </div>
   );

@@ -10,14 +10,15 @@ const ModalWindow: FC<ModalWindowProps> = ({ isModalOpen, closeModal }) => {
     const timer = setTimeout(() => {
       closeModal();
       clearTimeout(timer);
-    }, 4000);
+    }, 5000);
   };
   closeThisModal();
 
   return (
     <div className={`modal-wrapper ${isModalOpen ? '' : 'display-none'}`}>
       <div className='modal-img'></div>
-      <h2 className='modal-title'>You information is successfully saved!</h2>
+      <h2 className='modal-title'>A new character was successfully created!</h2>
+      <h3 className='modal-title add'>May the Force be with you</h3>
     </div>
   );
 };

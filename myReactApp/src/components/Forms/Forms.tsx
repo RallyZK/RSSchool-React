@@ -1,9 +1,17 @@
 import './Forms.css';
 import React, { FC } from 'react';
-import ReactSelect from 'react-select';
+import { radioOptions } from '../../utils/details';
 import { IData, IOption } from '../../utils/types';
-import { radioOptions, selectOptions } from '../../utils/details';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  setName,
+  setDate,
+  setGender,
+  setCharacterType,
+  setFile,
+  setAgree,
+} from '../../store/reducers/forms/ActionCreator';
 interface FormsProps {
   createNewCard: (newCard: IData) => void;
   openModal: () => void;
@@ -12,8 +20,8 @@ interface FormsProps {
 const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
   const { register, formState, handleSubmit, control, reset } = useForm<IData>();
   const { errors } = formState;
-
-  const getValue = (value: string) => (value ? selectOptions.find((option) => option.value === value) : '');
+  const dispatch = useAppDispatch();
+  const { name, date, gender, characterType, file, agree } = useAppSelector((state) => state.formsReducer);
 
   const onSubmit: SubmitHandler<IData> = (data: IData) => {
     const file = URL.createObjectURL(new Blob([data.file]));
@@ -21,6 +29,43 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
     createNewCard(data);
     openModal();
     reset();
+    setInitialState();
+  };
+
+  const setNameToState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setName(e.target.value));
+  };
+
+  const setDateToState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setDate(e.target.value));
+  };
+
+  const setGenderToState = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setGender(e.target.value));
+  };
+
+  const setCharacterTypeToState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setCharacterType(e.target.value));
+    e.target.checked = true;
+  };
+
+  const setAgreeToState = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setAgree(e.target.checked));
+  };
+
+  const setFileToState = (uploadedFile: File | undefined) => {
+    const file = uploadedFile ? URL.createObjectURL(new Blob([uploadedFile])) : undefined;
+    dispatch(setFile(file));
+    console.log('state', file);
+  };
+
+  const setInitialState = () => {
+    dispatch(setName(''));
+    dispatch(setDate(''));
+    dispatch(setGender(''));
+    dispatch(setCharacterType(''));
+    dispatch(setFile(undefined));
+    dispatch(setAgree(false));
   };
 
   return (
@@ -33,77 +78,97 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
           <input
             id='name'
             {...register('name', {
-              required: 'Please, enter your name',
+              required: 'Please, enter character name',
               minLength: {
                 value: 2,
                 message: 'Name should contain min 2 characters',
               },
               pattern: {
                 value: /^[a-zA-Z]+$/,
-                message: 'Please, write your name only in latin characters',
+                message: 'Please, write a name only in latin characters with no spaces',
               },
               validate: (text) => text[0] === text[0].toUpperCase() || 'Name should starts with capital letter',
             })}
-            className='input-name'
-            placeholder='Enter your name here'
+            className='input'
+            placeholder='Enter character name here'
+            value={name}
+            onChange={(e) => setNameToState(e)}
           ></input>
         </div>
         <div className='input-wrapper'>
           <label htmlFor='date' className='label'>
-            Visit date: <span className='error'>{errors?.date?.message?.toString()}</span>
+            Birth date: <span className='error'>{errors?.date?.message?.toString()}</span>
           </label>
           <input
             id='date'
             type='date'
             {...register('date', {
               required: 'Please, select a date',
-              min: {
+              max: {
                 value: new Date().toISOString(),
-                message: 'You have selected a past date',
+                message: 'You have selected a future date',
               },
             })}
-            className='input-date'
+            className='input'
+            value={date}
+            onChange={(e) => setDateToState(e)}
           ></input>
         </div>
-        <Controller
-          control={control}
-          name='purpose'
-          rules={{
-            required: 'Please, select a purpose',
-          }}
-          render={({ field: { value, onChange }, fieldState: { error } }) => (
-            <div className='input-wrapper'>
-              <label htmlFor='select' className='label'>
-                Purpose of the visit: <span className='error'>{error && error.message}</span>
-              </label>
-              <ReactSelect
-                className='input-select'
-                options={selectOptions}
-                placeholder={'Select a purpose'}
-                value={getValue(value)}
-                onChange={(newValue) => onChange((newValue as IOption).value)}
-              />
-            </div>
-          )}
-        />
         <div className='input-wrapper'>
-          <p className='label'>Do you need a transfer from the airport?</p>
-          <p className='label error'>{errors.transfer?.message?.toString()}</p>
+          <label className='label'>
+            Gender: <span className='error'>{errors?.gender?.message?.toString()}</span>
+          </label>
+          <select
+            {...register('gender', {
+              required: 'Please, select a gender',
+              validate: (v) => v !== '0' || 'error message',
+            })}
+            defaultValue={gender}
+            onChange={(e) => setGenderToState(e)}
+            className='input'
+          >
+            <option value='' disabled>
+              Select a gender
+            </option>
+            <option value='female'>Female</option>
+            <option value='male'>Male</option>
+            <option value='n/a'>N/a</option>
+          </select>
+        </div>
+        <div className='input-wrapper'>
+          <p className='label'>Is it a Living being or Droid?</p>
+          <p className='label error'>{errors.characterType?.message?.toString()}</p>
           {radioOptions.map((el: IOption) => (
             <label className='mini-label' key={el.value}>
               <input
-                {...register('transfer', {
+                {...register('characterType', {
                   required: 'Please, select something',
                 })}
-                name='transfer'
+                name='characterType'
                 type='radio'
                 value={el.value}
+                onChange={(e) => setCharacterTypeToState(e)}
+                defaultChecked={el.value === characterType}
               ></input>
               {el.value}
             </label>
           ))}
         </div>
-        <Controller
+        <div className='input-wrapper'>
+          <p className='label'>
+            Upload a photo: <span className='error'>{errors?.file?.message?.toString()}</span>
+          </p>
+          <input
+            type='file'
+            accept='image/*,.png,.jpg'
+            {...register('file', {
+              required: 'Please, upload a file',
+            })}
+            defaultValue={file}
+            onChange={(e) => setFileToState(e.target.files?.[0])}
+          ></input>
+        </div>
+        {/* <Controller
           name='file'
           control={control}
           rules={{
@@ -124,9 +189,9 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
               </div>
             );
           }}
-        />
+        /> */}
         <div className='input-wrapper'>
-          <p className='label'>Consent on personal data processing</p>
+          <p className='label'>Confirm the information you entered</p>
           <p className='label error'>{errors?.agree?.message?.toString()}</p>
           <label className='mini-label'>
             <input
@@ -134,11 +199,13 @@ const Forms: FC<FormsProps> = ({ createNewCard, openModal }) => {
                 required: 'Please, confirm consent',
               })}
               type='checkbox'
+              onChange={(e) => setAgreeToState(e)}
+              defaultChecked={agree}
             ></input>
-            I agree
+            I confirm
           </label>
         </div>
-        <button className='db-button'>Submit</button>
+        <button className='db-button'>Create</button>
       </form>
     </>
   );

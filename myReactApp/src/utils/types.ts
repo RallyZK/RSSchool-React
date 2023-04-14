@@ -1,14 +1,3 @@
-export interface IHouse {
-  id: number;
-  title: string;
-  price: number;
-  location: string;
-  bedroomsCount: number;
-  bathroomsCount: number;
-  square: number;
-  url: string;
-  picUrl: string;
-}
 export interface IFormsState {
   nameError: string;
   selectError: string;
@@ -21,9 +10,9 @@ export interface IFormsState {
 export interface IData {
   name: string;
   date: string;
-  purpose: string;
+  gender: string;
   agree: string;
-  transfer: string;
+  characterType: string;
   file: string;
 }
 export interface IOption {

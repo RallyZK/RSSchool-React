@@ -15,10 +15,7 @@ export const noResultsText = (
           imagination. Whatever the case may be, we urge you not to give up hope.
         </p>
 
-        <p>
-          Until then, remember the words of the legendary Jedi Master Obi-Wan Kenobi: «The Force will be with you,
-          always.»
-        </p>
+        <p>Until then, remember the words of the legendary Jedi Master Obi-Wan Kenobi: «May the Force be with you»</p>
 
         <p>
           Сожалеем, но наши поиски натолкнулись на возмущение Силы. Несмотря на все наши усилия, нам не удалось найти

@@ -1,13 +1,13 @@
 .modal-wrapper {
-  width: 320px;
-  height: 200px;
+  width: 350px;
+  height: 230px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  background-color: #ffffff;
+  background-color: #000000;
   position: absolute;
   left: 50%;
   top: 187px;
@@ -20,7 +20,7 @@
 .modal-img {
   width: 100px;
   height: 100px;
-  background-image: url('../../assets/pics/stiker.PNG');
+  background-image: url('../../assets/pics/yoda.svg');
   background-size: cover;
 }
 
@@ -29,6 +29,11 @@
   font-weight: 600;
   line-height: 20px;
   margin: 5px 0;
+  color: #fff;
+}
+
+.add {
+  color: #f1c40f;
 }
 
 .display-none {

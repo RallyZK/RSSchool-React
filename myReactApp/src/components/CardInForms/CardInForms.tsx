@@ -13,13 +13,13 @@ const FormCard: FC<FormCardProps> = ({ card }) => {
       <div className='form-card-content'>
         <h4>{card.name}</h4>
         <p className='form-card-desc'>
-          <span className='span'>Visit date:</span> {card.date}
+          <span className='span'>Birth date:</span> {card.date}
         </p>
         <p className='form-card-desc'>
-          <span className='span'>Purpose of the visit:</span> {card.purpose}
+          <span className='span'>Gender:</span> {card.gender}
         </p>
         <p className='form-card-desc'>
-          <span className='span'>Transfer is needed:</span> {card.transfer}
+          <span className='span'>Character type:</span> {card.characterType}
         </p>
       </div>
     </div>
