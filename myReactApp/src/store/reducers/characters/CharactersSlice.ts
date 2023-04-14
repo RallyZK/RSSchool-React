@@ -24,21 +24,21 @@ export const charactersSlice = createSlice({
       state.searchPhrase = action.payload;
     },
   },
-  extraReducers: {
-    [fetchCharacters.fulfilled.type]: (state, action: PayloadAction<IPerson[]>) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchCharacters.pending.type, (state) => {
+      state.isLoading = true;
+      state.message = 'Searching in a galaxy far, far away...';
+    });
+    builder.addCase(fetchCharacters.fulfilled.type, (state, action: PayloadAction<IPerson[]>) => {
       state.isLoading = false;
       state.characters = action.payload;
       state.message = '';
-    },
-    [fetchCharacters.pending.type]: (state) => {
-      state.isLoading = true;
-      state.message = 'Searching in a galaxy far, far away...';
-    },
-    [fetchCharacters.rejected.type]: (state, action: PayloadAction<string>) => {
+    });
+    builder.addCase(fetchCharacters.rejected.type, (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.message = action.payload;
       state.message = '';
-    },
+    });
   },
 });
 

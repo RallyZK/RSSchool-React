@@ -1,12 +1,18 @@
 import React from 'react';
 import FormsPage from '../pages/FormsPage/FormsPage';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { setupStore } from '../store/store';
 
 describe('FormsPage test', () => {
   test('FormsPage renders correctly', () => {
-    render(<FormsPage />);
-    const titles = screen.getAllByText(/forms/i);
-    expect(titles[0]).toBeInTheDocument();
-    expect(titles[1]).toBeInTheDocument();
+    const store = setupStore();
+    render(
+      <Provider store={store}>
+        <FormsPage />
+      </Provider>,
+    );
+    expect(screen.getByText(/forms/i)).toBeInTheDocument();
+    expect(screen.getByText(/CREATE NEW CHARACTER/i)).toBeInTheDocument();
   });
 });
