@@ -9,7 +9,7 @@ const CardsList = () => {
   return (
     <div className='cards-collection'>
       {cards.map((card: IData) => (
-        <CardInForms card={card} key={card.name} />
+        <CardInForms card={card} key={crypto.randomUUID()} />
       ))}
     </div>
   );
