@@ -49,7 +49,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "ssr": "ts-node --esm server.ts",
+    "ssr": "ts-node -P tsconfig.node.json server.ts",
     "test": "jest test --coverage --watchAll=false",
     "debugTest": "jest test",
     "lint": "eslint --ext js,ts,tsx src"

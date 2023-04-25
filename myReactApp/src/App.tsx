@@ -1,4 +1,6 @@
 import './App.css';
+import './index.css';
+import '../src/components/Layout/Layout.css';
 import React from 'react';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Layout from './components/Layout/Layout';
@@ -8,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import FormsPage from './pages/FormsPage/FormsPage';
 
 const App = () => {
+  console.log('app');
   return (
     <Layout>
       <Routes>

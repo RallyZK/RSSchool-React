@@ -6,7 +6,8 @@ import { IPerson, IResponse } from '../../../utils/types';
 const _apiBase = 'https://swapi.dev/api/people';
 
 export async function searchCharacter(text: string) {
-  const responce = await fetch(`${_apiBase}/?search=${text}`);
+  const url = text.length ? `${_apiBase}/?search=${text}` : _apiBase;
+  const responce = await fetch(url);
   const data = await responce.json();
   return updateResponseData(data);
 }
@@ -29,6 +30,6 @@ export const fetchCharacters = createAsyncThunk('characters/Search', async (text
   }
 });
 
-export const setSearchPhrase = (phrase: string) => (dispatch: AppDispatch) => {
-  dispatch(charactersSlice.actions.setSearchPhrase(phrase));
-};
+// export const setSearchPhrase = (phrase: string) => (dispatch: AppDispatch) => {
+//   dispatch(charactersSlice.actions.setSearchPhrase(phrase));
+// };

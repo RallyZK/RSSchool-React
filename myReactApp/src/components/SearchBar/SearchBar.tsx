@@ -1,7 +1,8 @@
 import './SearchBar.css';
 import React, { FC, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setSearchPhrase } from '../../store/reducers/characters/ActionCreator';
+import { setSearchPhrase } from '../../store/reducers/characters/CharactersSlice';
+// import { setSearchPhrase } from '../../store/reducers/characters/ActionCreator';
 interface SearchBarProps {
   findCharacters: (text: string) => void;
 }
@@ -24,29 +25,39 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
     dispatch(setSearchPhrase(phrase));
   };
 
-  const searchCharacter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.code === 'Enter') {
-      findCharacters(searchPhrase);
-    }
-  };
+  // const searchCharacter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (event.code === 'Enter') {
+  //     findCharacters(searchPhrase);
+  //   }
+  // };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (searchBarRef.current) dispatch(setSearchPhrase(searchBarRef.current.value));
+    console.log('enter');
+    event.preventDefault();
   };
 
   return (
-    <form className='search-bar' onSubmit={(event) => handleFormSubmit(event)}>
+    <form className='search-bar' onSubmit={handleFormSubmit}>
       <div className='magnifier'></div>
-      <input
+      {/* <input
         defaultValue={searchPhrase}
         ref={searchBarRef}
         // value={searchPhrase}
         className='search-input'
         // onChange={(event) => handleChange(event)}
-        onKeyDown={(event) => searchCharacter(event)}
+        // onKeyDown={(event) => searchCharacter(event)}
+        placeholder='Enter character name. Example: Luke Skywalker'
+      ></input> */}
+      <input
+        value={searchPhrase}
+        className='search-input'
+        onChange={(event) => handleChange(event)}
+        // onKeyDown={(event) => searchCharacter(event)}
         placeholder='Enter character name. Example: Luke Skywalker'
       ></input>
+      <button type='submit'>click</button>
     </form>
   );
 };

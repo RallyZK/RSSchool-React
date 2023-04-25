@@ -19,7 +19,8 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchCharacters(searchPhrase));
+    //dispatch(fetchCharacters(searchPhrase));
+    console.log('star wars home page');
   }, [dispatch, searchPhrase]);
 
   const openCardModal = (card: IPerson) => {

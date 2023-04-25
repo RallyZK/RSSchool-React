@@ -1,4 +1,4 @@
-import './index.css';
+// import './index.css';
 import App from './App';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -9,6 +9,8 @@ import { BrowserRouter } from 'react-router-dom';
 const store = setupStore(window.PRELOADED_STATE);
 
 delete window.PRELOADED_STATE;
+
+console.log('динозавр');
 
 ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,

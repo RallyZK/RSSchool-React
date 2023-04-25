@@ -42,4 +42,6 @@ export const charactersSlice = createSlice({
   },
 });
 
+export const { setSearchPhrase } = charactersSlice.actions;
+
 export default charactersSlice.reducer;

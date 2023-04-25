@@ -1,22 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Header = () => {
-  const links = [
-    {
-      link: '/',
-      title: 'Home',
-    },
-    {
-      link: '/about',
-      title: 'About',
-    },
-    {
-      link: '/forms',
-      title: 'Forms',
-    },
-  ];
+const links = [
+  {
+    link: '/',
+    title: 'Home',
+  },
+  {
+    link: '/about',
+    title: 'About',
+  },
+  {
+    link: '/forms',
+    title: 'Forms',
+  },
+];
 
+const Header = () => {
   return (
     <header className='header'>
       <nav>

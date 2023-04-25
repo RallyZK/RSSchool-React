@@ -54,9 +54,7 @@ type RenderFullPageType = {
   preloadedState: RootState;
 };
 
-const RenderFullPage: FC<RenderFullPageType> = (props) => {
-  const { app, preloadedState } = props;
-
+const RenderFullPage: FC<RenderFullPageType> = ({ app, preloadedState }) => {
   return (
     <html lang='en'>
       <head>
