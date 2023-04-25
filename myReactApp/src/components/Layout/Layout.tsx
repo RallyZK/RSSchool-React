@@ -1,7 +1,7 @@
+import './Layout.css';
 import React, { FC } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import './Layout.css';
 
 type Props = {
   children: React.ReactNode;

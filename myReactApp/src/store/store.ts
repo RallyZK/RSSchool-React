@@ -7,9 +7,10 @@ const rootReducer = combineReducers({
   formsReducer,
 });
 
-export const setupStore = () => {
+export const setupStore = (preloadedState?: object) => {
   return configureStore({
     reducer: rootReducer,
+    preloadedState,
   });
 };
 

@@ -1,31 +1,34 @@
-import fs from 'fs';
-import path from 'path';
-import React from 'react';
 import express from 'express';
-// import App from './src/App';
-import { fileURLToPath } from 'url';
-import { render } from './entry-server';
-import { renderToString } from 'react-dom/server';
+import serveStatic from 'serve-static';
+import { createServer as createViteServer, ViteDevServer } from 'vite';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PORT = 5000;
 
-const app = express();
+const createServer = async () => {
+  const app = express();
 
-app.use(express.static('build'));
-
-app.get('*', async (req, res) => {
-  // const reactApp = renderToString(React.createElement(App));
-  const template = fs.readFile(path.resolve(__dirname, 'index.html'), 'utf-8', (err: any, data: string) => {
-    if (err) {
-      const errMsg = `There is an error: ${err}`;
-      console.error(errMsg);
-      return res.status(500).send(errMsg);
-    }
-    data.replace('<div id="root"></div>', `<div id="root">${render(req.url)}</div>`);
+  const viteServ = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'custom',
   });
-  res.send(template);
-});
+  app.use(viteServ.middlewares);
+  app.use('/assets', express.static('./build/client'));
 
-app.listen(5000, () => {
-  console.log(`Server is listening on port: 5000`);
-});
+  app.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+
+    try {
+      const renderApp = (await viteServ.ssrLoadModule('./entry-server.tsx')).render;
+      await renderApp(url, res);
+    } catch (error: unknown) {
+      viteServ.ssrFixStacktrace(error as Error);
+      next(error);
+    }
+  });
+
+  return { app };
+};
+
+createServer().then(({ app }) =>
+  app.listen(PORT, () => console.log(`Application is listening on the http://localhost:${PORT}/`)),
+);

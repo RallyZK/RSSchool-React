@@ -10,14 +10,14 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
   const dispatch = useAppDispatch();
   const { searchPhrase } = useAppSelector((state) => state.сharactersReducer);
 
-  const searchBarRef = useRef('');
-  searchBarRef.current = searchPhrase;
+  const searchBarRef = useRef<HTMLInputElement>(null);
+  // searchBarRef.current = searchPhrase;
 
-  useEffect(() => {
-    return () => {
-      dispatch(setSearchPhrase(searchBarRef.current));
-    };
-  }, [dispatch]);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(setSearchPhrase(searchBarRef.current));
+  //   };
+  // }, [dispatch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const phrase = event.target.value;
@@ -32,15 +32,18 @@ const SearchBar: FC<SearchBarProps> = ({ findCharacters }) => {
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (searchBarRef.current) dispatch(setSearchPhrase(searchBarRef.current.value));
   };
 
   return (
     <form className='search-bar' onSubmit={(event) => handleFormSubmit(event)}>
       <div className='magnifier'></div>
       <input
-        value={searchPhrase}
+        defaultValue={searchPhrase}
+        ref={searchBarRef}
+        // value={searchPhrase}
         className='search-input'
-        onChange={(event) => handleChange(event)}
+        // onChange={(event) => handleChange(event)}
         onKeyDown={(event) => searchCharacter(event)}
         placeholder='Enter character name. Example: Luke Skywalker'
       ></input>

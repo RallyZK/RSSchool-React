@@ -1,19 +1,22 @@
 import './index.css';
 import App from './App';
 import React from 'react';
-import { hydrateRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
+import { setupStore } from './store/store';
+import { BrowserRouter } from 'react-router-dom';
 
-// const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-// );
+const store = setupStore(window.PRELOADED_STATE);
 
-const node = (
+delete window.PRELOADED_STATE;
+
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
 );
-const root = hydrateRoot(document.getElementById('root') as HTMLElement, node);
-root.render(node);

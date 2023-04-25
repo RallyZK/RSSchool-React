@@ -30,7 +30,7 @@ const Header = () => {
           ))}
         </ul>
       </nav>
-      <div className='logo'></div>
+      <div className='logo' onClick={() => console.log('star wars')}></div>
     </header>
   );
 };

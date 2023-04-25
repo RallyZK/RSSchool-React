@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import './HomePage.css';
 import { IPerson } from '../../utils/types';
 import Card from '../../components/Card/Card';
@@ -20,12 +19,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    if (characters.length === 0) dispatch(fetchCharacters(searchPhrase));
-  }, []);
+    dispatch(fetchCharacters(searchPhrase));
+  }, [dispatch, searchPhrase]);
 
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
     setCurrentCard(card);
+    console.log('open');
   };
 
   const closeCardModal = () => {
@@ -35,7 +35,7 @@ const HomePage = () => {
   return (
     <div className='page'>
       <h3 className='page-title'>Home Page</h3>
-      <h1>Star Wars universe characters</h1>
+      <h1 onClick={() => console.log('hhhhhhh11111')}>Star Wars universe characters</h1>
       <SearchBar findCharacters={findCharacters} />
       {!isLoading ? (
         <div className='cards-wrapper'>
