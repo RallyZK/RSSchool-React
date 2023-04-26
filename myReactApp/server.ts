@@ -1,6 +1,5 @@
 import express from 'express';
-import serveStatic from 'serve-static';
-import { createServer as createViteServer, ViteDevServer } from 'vite';
+import { createServer as createViteServer } from 'vite';
 
 const PORT = 5000;
 
