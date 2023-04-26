@@ -1,5 +1,3 @@
-import { AppDispatch } from '../../store';
-import { charactersSlice } from './CharactersSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IPerson, IResponse } from '../../../utils/types';
 
@@ -29,7 +27,3 @@ export const fetchCharacters = createAsyncThunk('characters/Search', async (text
     return thunkAPI.rejectWithValue('Fetching Error');
   }
 });
-
-// export const setSearchPhrase = (phrase: string) => (dispatch: AppDispatch) => {
-//   dispatch(charactersSlice.actions.setSearchPhrase(phrase));
-// };

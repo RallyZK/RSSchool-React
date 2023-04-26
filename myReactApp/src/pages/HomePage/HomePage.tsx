@@ -14,19 +14,13 @@ const HomePage = () => {
   const [currentCard, setCurrentCard] = useState<IPerson | null>(null);
   const { characters, isLoading, message, searchPhrase } = useAppSelector((state) => state.сharactersReducer);
 
-  const findCharacters = async (text: string) => {
-    dispatch(fetchCharacters(text));
-  };
-
   useEffect(() => {
-    //dispatch(fetchCharacters(searchPhrase));
-    console.log('star wars home page');
-  }, [dispatch, searchPhrase]);
+    if (characters.length === 0) dispatch(fetchCharacters(searchPhrase));
+  }, [characters.length, dispatch, searchPhrase]);
 
   const openCardModal = (card: IPerson) => {
     setIsModalOpen(true);
     setCurrentCard(card);
-    console.log('open');
   };
 
   const closeCardModal = () => {
@@ -36,8 +30,8 @@ const HomePage = () => {
   return (
     <div className='page'>
       <h3 className='page-title'>Home Page</h3>
-      <h1 onClick={() => console.log('hhhhhhh11111')}>Star Wars universe characters</h1>
-      <SearchBar findCharacters={findCharacters} />
+      <h1>Star Wars universe characters</h1>
+      <SearchBar />
       {!isLoading ? (
         <div className='cards-wrapper'>
           {characters.map((card: IPerson) => (

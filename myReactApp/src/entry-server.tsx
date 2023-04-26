@@ -1,23 +1,21 @@
-import App from './src/App';
+import App from './App';
 import React, { FC } from 'react';
 import { Response } from 'express';
 import { Provider } from 'react-redux';
-import { IResponse } from './src/utils/types';
+import { IResponse } from './utils/types';
+import { PreloadedState } from '@reduxjs/toolkit';
+import { setupStore, RootState } from './store/store';
 import { StaticRouter } from 'react-router-dom/server';
 import { renderToPipeableStream } from 'react-dom/server';
-import { setupStore, RootState } from './src/store/store';
-import { searchCharacter } from './src/store/reducers/characters/ActionCreator';
-import { PreloadedState } from '@reduxjs/toolkit';
+import { searchCharacter } from './store/reducers/characters/ActionCreator';
 
-// rename
-const preloadCardsApi = async (callback: (preloadResult: IResponse) => void) => {
+const preloadCharactersCards = async (callback: (preloadResult: IResponse) => void) => {
   const characters = await searchCharacter('');
   callback(characters);
 };
 
 export const render = async (url: string, res: Response) => {
-  // rename
-  preloadCardsApi((result) => {
+  preloadCharactersCards((result) => {
     const preloadedState: PreloadedState<RootState> = {
       сharactersReducer: {
         searchPhrase: '',

@@ -18,7 +18,7 @@ const createServer = async () => {
     const url = req.originalUrl;
 
     try {
-      const renderApp = (await viteServ.ssrLoadModule('./entry-server.tsx')).render;
+      const renderApp = (await viteServ.ssrLoadModule('./src/entry-server.tsx')).render;
       await renderApp(url, res);
     } catch (error: unknown) {
       viteServ.ssrFixStacktrace(error as Error);

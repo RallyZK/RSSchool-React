@@ -1,0 +1,11 @@
+import './index.css';
+import '../src/components/Card/Card.css';
+import '../src/components/Forms/Forms.css';
+import '../src/pages/HomePage/HomePage.css';
+import '../src/components/Layout/Layout.css';
+import '../src/pages/FormsPage/FormsPage.css';
+import '../src/components/SearchBar/SearchBar.css';
+import '../src/components/CardsList/CardsList.css';
+import '../src/components/CardInForms/CardInForms.css';
+import '../src/components/ModalWindow/ModalWindow.css';
+import '../src/components/CardModalWindow/CardModalWindow.css';
