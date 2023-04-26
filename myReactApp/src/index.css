@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  color: #ffffff;
+  background: radial-gradient(ellipse at bottom, #1C2837 0%, #050608 100%);
+}
+
+h1 {
+  margin: 0px;
+  font-size: 18px;
+  color: #838383;
+  text-transform: uppercase;
+}
+
+.header,
+.footer {
+  height: 50px;
+  display: flex;
+  font-weight: 600;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+.header {
+  position: relative;
+  justify-content: space-between;
+  border-bottom: 1px #fff solid;
+}
+
+.footer {
+  justify-content: center;
+  border-top: 1px #fff solid;
+}
+
+.header-ul,
+.footer-ul {
+  gap: 5px;
+  display: flex;
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.header-ul {
+  justify-content: center;
+}
+
+.footer-ul {
+  width: 100%;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: #fffefe;
+}
+
+a:visited {
+  color: #ffffff;
+}
+
+.navlink {
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: all ease-in;
+  transition-duration: 200ms;
+}
+
+.page {
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-title {
+  top: -60px;
+  right: 0px;
+  position: absolute;
+}
+
+.logo {
+  top: 0;
+  left: 50%;
+  width: 300px;
+  height: 40px;
+  position: absolute;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translate(-50%, 5px);
+  background-image: url('./assets/pics/Star_Wars_Yellow_One_Line_Logo.svg');
+}
+
+.active {
+  background-color: #646464;
+}
+
+.navlink:hover {
+  color: #FFC500;
+  font-weight: 600;
+}
+
+@media (max-width: 710px) {
+
+  .logo {
+    width: 200px;
+  }
+}
+
+@media (max-width: 610px) {
+
+  .logo {
+    width: 100px;
+  }
+}

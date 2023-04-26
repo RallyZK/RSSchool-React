@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "outDir": "./build",
+    "noEmit": false
+  },
+  "include": ["server.ts"],
+  "exclude": ["vite.config.ts"]
+}

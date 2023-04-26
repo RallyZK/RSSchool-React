@@ -1,0 +1,26 @@
+h3, h5, p {
+  margin: 0;
+}
+
+.forms-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 470px;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.input-name,
+.input-date,
+.input-select {
+  height: 25px;
+}
